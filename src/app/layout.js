@@ -1,3 +1,10 @@
+import '../assets/css/plugins/fontawesome-6.css';
+import '../assets/css/plugins/swiper.min.css';
+import '../assets/css/vendor/bootstrap.min.css';
+// import './assets/css/vendor/jquery-ui.css';
+import '../assets/css/vendor/magnific-popup.css';
+import '../assets/css/vendor/metismenu.css';
+import '../assets/css/style.css';
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -20,6 +27,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+       <head>
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          rel="stylesheet"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
