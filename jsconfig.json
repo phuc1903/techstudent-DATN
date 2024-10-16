@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"] // hoặc "@/app/*": ["src/app/*"] nếu bạn muốn giới hạn alias
+    }
+  }
+}
