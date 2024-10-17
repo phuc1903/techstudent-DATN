@@ -9,5 +9,5 @@ clone tất cả về
 bước 2:
 npm i
 bước 3:
-npm run dev
+npm run dev là chạy đc 
 :))
