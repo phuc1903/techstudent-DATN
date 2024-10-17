@@ -1,7 +1,9 @@
 "use client"
 
 import React  from 'react';
+
 import { Subcategory,Category } from '../category/category.component';
+import Link from 'next/link';
 
 // import { Coursesoutstanding,Coursenew } from "@/app/service/course/course.service";
 
@@ -46,9 +48,9 @@ const OutstandingCourse =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -71,11 +73,11 @@ const OutstandingCourse =() =>{
                     <span>54 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     The Complete Web Developer in 2023: Zero to Mastery
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -114,9 +116,9 @@ const OutstandingCourse =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -142,11 +144,11 @@ const OutstandingCourse =() =>{
                     <span>60 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     How to Write the Ultimate 1 Page Strategic Business Plan
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">William U. Peña, MBA</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -184,9 +186,9 @@ const OutstandingCourse =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -209,11 +211,11 @@ const OutstandingCourse =() =>{
                     <span>40 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     100 Days Of Code - 2023 Web Development Bootcamp
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -252,9 +254,9 @@ const OutstandingCourse =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -280,11 +282,11 @@ const OutstandingCourse =() =>{
                     <span>14 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     User Experience The Ultimate Guide to Usability and UX
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">David Travis</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -323,9 +325,9 @@ const OutstandingCourse =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -351,11 +353,11 @@ const OutstandingCourse =() =>{
                     <span>54 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     Complete Guitar Lessons System Beginner to Advanced
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Erich Andreas</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -394,9 +396,9 @@ const OutstandingCourse =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -419,11 +421,11 @@ const OutstandingCourse =() =>{
                     <span>54 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     How to Market Yourself as Coach or Consultant Market
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -461,9 +463,9 @@ const OutstandingCourse =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -486,11 +488,11 @@ const OutstandingCourse =() =>{
                     <span>54 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     How to Run truly Productive in Meetings – and add value
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -529,9 +531,9 @@ const OutstandingCourse =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -557,11 +559,11 @@ const OutstandingCourse =() =>{
                     <span>54 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     Pole Dancing Video Course with Noelle Wood
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -647,9 +649,9 @@ const CourseNew =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -672,11 +674,11 @@ const CourseNew =() =>{
                     <span>54 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     The Complete Web Developer in 2023: Zero to Mastery
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -715,9 +717,9 @@ const CourseNew =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -743,11 +745,11 @@ const CourseNew =() =>{
                     <span>60 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     How to Write the Ultimate 1 Page Strategic Business Plan
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">William U. Peña, MBA</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -785,9 +787,9 @@ const CourseNew =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -810,11 +812,11 @@ const CourseNew =() =>{
                     <span>40 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     100 Days Of Code - 2023 Web Development Bootcamp
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -853,9 +855,9 @@ const CourseNew =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -881,11 +883,11 @@ const CourseNew =() =>{
                     <span>14 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     User Experience The Ultimate Guide to Usability and UX
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">David Travis</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -924,9 +926,9 @@ const CourseNew =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -952,11 +954,11 @@ const CourseNew =() =>{
                     <span>54 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     Complete Guitar Lessons System Beginner to Advanced
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Erich Andreas</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -995,9 +997,9 @@ const CourseNew =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -1020,11 +1022,11 @@ const CourseNew =() =>{
                     <span>54 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     How to Market Yourself as Coach or Consultant Market
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -1062,9 +1064,9 @@ const CourseNew =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -1087,11 +1089,11 @@ const CourseNew =() =>{
                     <span>54 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     How to Run truly Productive in Meetings – and add value
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -1130,9 +1132,9 @@ const CourseNew =() =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -1158,11 +1160,11 @@ const CourseNew =() =>{
                     <span>54 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     Pole Dancing Video Course with Noelle Wood
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -1273,11 +1275,11 @@ const Courseseal = () =>{
                     <span>54 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     The Complete Web Developer in 2023: Zero to Mastery
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -1316,9 +1318,9 @@ const Courseseal = () =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -1344,11 +1346,11 @@ const Courseseal = () =>{
                     <span>60 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     How to Write the Ultimate 1 Page Strategic Business Plan
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">William U. Peña, MBA</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -1386,9 +1388,9 @@ const Courseseal = () =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -1411,11 +1413,11 @@ const Courseseal = () =>{
                     <span>40 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     100 Days Of Code - 2023 Web Development Bootcamp
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -1454,9 +1456,9 @@ const Courseseal = () =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -1482,11 +1484,11 @@ const Courseseal = () =>{
                     <span>14 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     User Experience The Ultimate Guide to Usability and UX
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">David Travis</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -1573,9 +1575,9 @@ const Coursefree = () =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -1598,11 +1600,11 @@ const Coursefree = () =>{
                     <span>54 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     The Complete Web Developer in 2023: Zero to Mastery
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -1641,9 +1643,9 @@ const Coursefree = () =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -1669,11 +1671,11 @@ const Coursefree = () =>{
                     <span>60 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     How to Write the Ultimate 1 Page Strategic Business Plan
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">William U. Peña, MBA</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -1711,9 +1713,9 @@ const Coursefree = () =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -1736,11 +1738,11 @@ const Coursefree = () =>{
                     <span>40 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     100 Days Of Code - 2023 Web Development Bootcamp
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">Dr. Angela Yu</p>
                 <div className="rating-and-price">
                   <div className="rating-area">
@@ -1779,9 +1781,9 @@ const Coursefree = () =>{
             >
               {/* rts single course */}
               <div className="rts-single-course">
-                <a href={'/page/course-detail'} className="thumbnail">
+                <Link href={'/page/course-detail'} className="thumbnail">
                   <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727111263/test/eidtlp8jtafefmgr3byp.jpg" alt="course" />
-                </a>
+                </Link>
                 <div
                   className="save-icon"
                   data-bs-toggle="modal"
@@ -1807,11 +1809,11 @@ const Coursefree = () =>{
                     <span>14 Students</span>
                   </div>
                 </div>
-                <a href={'/page/course-detail'}>
+                <Link href={'/page/course-detail'}>
                   <h5 className="title">
                     User Experience The Ultimate Guide to Usability and UX
                   </h5>
-                </a>
+                </Link>
                 <p className="teacher">David Travis</p>
                 <div className="rating-and-price">
                   <div className="rating-area">

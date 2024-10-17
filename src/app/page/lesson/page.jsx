@@ -5,8 +5,16 @@ import React, {  useState }  from 'react';
 import './page.css';
 export default function Lesson(){
     const [rating,setRating] = useState(0);
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
+
     const handleClickStart=(index) =>{
         setRating(index + 1);
+    }
+    const Openmenu =() =>{
+        setIsMenuVisible(true)
+    }
+    const Closemenu =() =>{
+        setIsMenuVisible(false)
     }
 
     return(
@@ -21,14 +29,17 @@ export default function Lesson(){
                     <p>Usd</p>
                 </div>
             </div>
-            <div className="grid grid-cols-[70%_30%] mt-8 items-end">
+            <div className="lesson-content">
                 <div className=''>
-                    <div>
+                    <div className='flex items-center justify-between'>
                    <a href={'/'}>
                    <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727967044/z5893902778330_3f5bed4df0f1d220b06d64708c4d87fc_rfjfty.jpg" 
                 className="w-72 hover:cursor-pointer"
                 alt="logo" />
                    </a>
+                   <div className='icon-menu  hover:cursor-pointer' onClick={() => Openmenu()}>
+                   <i class="bi bi-list-task"></i>
+                   </div>
                     </div>
                     
                 <div className="detail-lesson overflow-y-scroll ">
@@ -36,7 +47,6 @@ export default function Lesson(){
 
                     <div>
                     <iframe
-                        height="500px"
                         src="https://www.youtube.com/embed/fPL3-cODrVU?si=8Nz05i6TzsiG7WpY"
                         title="YouTube video player"
                         frameBorder="0"  // Thay đổi ở đây
@@ -221,10 +231,15 @@ export default function Lesson(){
                     </div>
                 </div>
                 </div>
-                <div >
-                     <div className="name-course p-4 border">
-                        <h6>khóa học lập trình python</h6>
-                     </div>
+                <div className={`menu-item ${isMenuVisible ? 'show' : ''}`}>
+                <div className='flex  items-center border'>
+                    <div className='icon-close hover:cursor-pointer' onClick={() => Closemenu()}>
+                        <i class="bi bi-x-lg"></i>
+                        </div>
+                        <div className="name-course p-4 ">
+                            <h6>khóa học lập trình python</h6>
+                        </div>
+                   </div>
                     <div className="overflow-y-scroll">
                     <div className="name-lesson flex items-center p-2 gap-4">
                            <div>

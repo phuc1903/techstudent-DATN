@@ -1,7 +1,12 @@
+"use client"
+
 import React from "react";
 import './comment.css'
 
 const Commenthome=() =>{
+    const xemtiep =() =>{
+        console.log('xem tiep')
+    }
     return(
         <div className="mb-10">
             <div className="grid small:grid-cols-1 md:grid-cols-3 gap-8 mx-6">
@@ -170,7 +175,7 @@ const Commenthome=() =>{
                             </div>
                         </div>
                         <div>
-                            <p>20/20/2020</p>
+                            <p>20/20/20244</p>
                         </div>
                     </div>
                 </div>
@@ -194,7 +199,7 @@ const Commenthome=() =>{
                 </div>
             </div>
             <div className="xemtiep">
-                <a href="" >xem tiếp</a>
+                <p onClick={() =>xemtiep()}>xem tiếp</p>
             </div>
         </div>
     )

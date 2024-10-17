@@ -1,6 +1,8 @@
 "use client"
 
 import React, { useEffect, useState }  from 'react';
+import Link from 'next/link';
+
 
 import './cart.css'
 import Accordion from '@mui/material/Accordion';
@@ -18,6 +20,7 @@ import { Categoryheader } from '../category/category.component';
 
 export default function Header(){
   const [visible, setVisible] = useState(false);
+  const [isopensearch,setIsopensearch] = useState(false);
   const [opencart,setOpencart] = useState(false);
   const [header2,setHeader2] = useState(false);
   const handleScroll = () => {
@@ -29,6 +32,12 @@ export default function Header(){
       setVisible(false);
     }
   };
+  const Opensearch =() =>{
+    setIsopensearch(true)
+  }
+  const Closesearch=()=>{
+    setIsopensearch(false);
+  }
   const closeheader2=() =>{
     setHeader2(false)
   }
@@ -53,9 +62,7 @@ useEffect(() => {
     return (
         <>
   {/* Mirrored from html.themewant.com/studyhub/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Sep 2024 19:38:48 GMT */}
-  <meta charSet="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Techstudent &amp;  </title>
+
   {/* <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.png" /> */}
 
   <header className="header-one header--sticky fixed top-0 ">
@@ -69,6 +76,22 @@ useEffect(() => {
     {opencart && (
        <Cart onAction={clickclosecart}/>
     )}
+
+    {isopensearch && (
+        <div className='input-search'>
+        <div className='div-input'>
+          <form>
+          <input type="text"  placeholder='tìm kiếm'/>  
+          </form>
+          <p className='hover:cursor-pointer' onClick={() =>Closesearch()}>hủy</p>
+        </div>
+        <div className='blur w-full h-full' onClick={() =>Closesearch()}>
+
+        </div>
+
+    </div>
+    )}
+
 
    
 
@@ -171,17 +194,17 @@ useEffect(() => {
               <nav>
                 <ul>
                   <li className="has-dropdown" style={{ position: "static" }}>
-                    <a className="nav-link" href="#">
+                    <Link className="nav-link" href="#">
                       Trang chủ
-                    </a>
+                    </Link>
                     <ul className="megamenu-hub">
                       <li>
                         <ul className="">
                           <li>
-                            <a href="index.html">Main Home</a>
+                            <Link href="index.html">Main Home</Link>
                           </li>
                           <li>
-                            <a href="index-two.html">Online course </a>
+                            <Link href="index-two.html">Online course </Link>
                             <span className="popular">Popular</span>
                           </li>
                           <li>
@@ -515,8 +538,8 @@ useEffect(() => {
                     </a>
                     <ul className="submenu">
                       <li className="sub-dropdown">
-                        <a className="submenu-link" href="javascript:void(0);">
-                          Instructor Dashboard
+                        <a className="submenu-link" href={"/page/dashboard-student"}>
+                          trang tính học viên
                         </a>
                         <ul className="submenu third-lvl base">
                           <li>
@@ -742,7 +765,7 @@ useEffect(() => {
             <div className="main-nav-one"></div>
             <div className="header-right-area-one">
               <div className="actions-area">
-                <div className="search-btn" id="search">
+                <div className="search-btn" id="search" onClick={()=>Opensearch()}>
                 <i className="bi bi-search search" style={{color:'#32ADE6', fontSize:'20px',fontWeight:'bold'}}></i>
                 </div>
                 <div className='cart cart-icon relative'>

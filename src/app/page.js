@@ -1,4 +1,6 @@
 // import Image from "next/image";
+import React from 'react';
+
 
 import Header from './component/header/header';
 import Homecomponent from "./component/home/home.component";

@@ -2,6 +2,46 @@
     --primary-color: #32ADE6;     /* Màu chính */
 
 }
+.input-search{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 600;
+    top: 0;
+    transform: translateY(-100%); /* Bắt đầu ở bên phải */
+    animation: slideTop 0.5s forwards;
+
+}
+@keyframes slideTop {
+    from {
+        transform: translateY(-100%); /* Bắt đầu từ bên phải */
+    }
+    to {
+        transform: translateY(0); /* Kết thúc ở vị trí ban đầu */
+    }
+}
+
+.input-search .blur:hover{
+    cursor: not-allowed;
+}
+.input-search input{
+    max-width: 500px;
+    border: 1px solid black;
+    border-radius: 20px;
+
+}
+.div-input{
+    padding: 10px;
+    background-color: white;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+.div-input form{
+    max-width: 500px;
+}
 
 .poputcart{
     position: fixed;

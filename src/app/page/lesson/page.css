@@ -15,6 +15,90 @@
 .header p{
     color: black;
 }
+.lesson-content {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    margin-top: 32px;
+    align-items: center;
+}
+iframe{
+    height: 500px;
+}
+.icon-menu{
+    display: none;
+    font-size: 30px;
+    margin-right: 16px;
+}
+.menu-item{
+    display: block;
+}
+.icon-close{
+    margin-left: 10px;
+    background-color: var(--color-primary);
+    padding:  6px 8px;
+    border-radius: 5px;
+}
+@media screen and (min-width: 900px) {
+    .icon-close{
+    display: none;        
+    }
+  }
+
+@media screen and (max-width: 900px) {
+    .lesson-content {
+        display: flex;
+    }
+    .icon-menu{
+        display: block;
+    }
+    .menu-item{
+        display: none;
+        position: absolute;
+        background-color: white;
+        width: 300px;
+        right: 0;
+        z-index: 1000;
+    }
+    .menu-item.show{
+        display: block;
+        transform: translateX(100%); /* Bắt đầu ở bên phải */
+        animation: slideIn 0.5s forwards; /* Thêm hiệu ứng */
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    iframe{
+    height: 350px;
+}
+  }
+
+  @media screen and (max-width: 550px) {
+    iframe{
+    height: 250px;
+}
+  }
+  @media screen and (max-width: 400px) {
+    iframe{
+    height: 200px;
+}
+  }
+  @keyframes slideIn {
+    from {
+        transform: translateX(100%); 
+    }
+    to {
+        transform: translateX(0); 
+    }
+}
+@keyframes slideOut {
+    from {
+        transform: translateX(0); 
+    }
+    to {
+        transform: translateX(100%); 
+    }
+}
+
 .detail-lesson{
     
     height: 100vh;
