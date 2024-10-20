@@ -1,21 +1,23 @@
-import React  from "react";
+import React from "react"; // Import useState and useEffect
 
 import { Commenthome } from "../comment/comment"; 
 import { OutstandingCourse,CourseNew,Courseseal,Coursefree } from "../course/course.component";
 import { NextCategory } from "../category/category.component";
 
 
-export default function Homecomponent(){
+export default function Homecomponent() {
+
+
     return (
         <div className="mt-32">
              <div className="banner-area-one shape-move">
     <div className="container">
       <div className="row">
-        <div className="col-lg-6 order-xl-1 order-lg-1 order-sm-2 order-2">
+        <div className="order-2 col-lg-6 order-xl-1 order-lg-1 order-sm-2">
           <div className="banner-content-one">
             <div className="inner">
               <div className="pre-title-banner">
-              <i className="bi bi-lightbulb mr-4" style={{color:'#32ADE6'}}></i>
+              <i className="mr-4 bi bi-lightbulb" style={{color:'#32ADE6'}}></i>
                 <span>Cổng vào Học tập suốt đời</span>
               </div>
               <h1 className="title-banner">
@@ -36,15 +38,15 @@ export default function Homecomponent(){
                 <div className="sm-image-wrapper">
                   <div className="images-wrap">
                     <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727795766/test/ibfrnt0slnaqhtjkdrjc.jpg" alt="banner"
-                    className="w-20 h-20 rounded-full p-1 bg-white"
+                    className="w-20 h-20 p-1 bg-white rounded-full"
                     />
                     <img
-                      className="two w-20 h-20 rounded-full p-1 bg-white"
+                      className="w-20 h-20 p-1 bg-white rounded-full two"
                       src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727795766/test/ibfrnt0slnaqhtjkdrjc.jpg"
                       alt="banner"
                     />
                     <img
-                      className="three w-20 h-20 rounded-full p-1 bg-white"
+                      className="w-20 h-20 p-1 bg-white rounded-full three"
                       src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1727795766/test/ibfrnt0slnaqhtjkdrjc.jpg"
                       alt="banner"
                     />
@@ -58,7 +60,7 @@ export default function Homecomponent(){
             </div>
           </div>
         </div>
-        <div className="col-lg-6 order--xl-2 order-lg-2 order-sm-1 order-1">
+        <div className="order-1 col-lg-6 order--xl-2 order-lg-2 order-sm-1">
           <div className="banner-right-img">
             <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1728125796/01_aespxo.png" alt="banner" />
           </div>
@@ -68,7 +70,7 @@ export default function Homecomponent(){
     <div className="review-thumb">
       {/* single review */}
       <div className="review-single">
-      <i className="bi bi-backpack4 w-32 h-16 text-black text-3xl rounded-lg justify-center flex items-center" style={{backgroundColor:'#32ADE6'}}></i>
+      <i className="flex items-center justify-center w-32 h-16 text-3xl text-black rounded-lg bi bi-backpack4" style={{backgroundColor:'#32ADE6'}}></i>
         <div className="info-right">
           <h6 className="title">4.5</h6>
           <span>(2.4k Review)</span>
@@ -77,7 +79,7 @@ export default function Homecomponent(){
       {/* single review end */}
       {/* single review */}
       <div className="review-single two">
-      <i className="bi bi-buildings-fill  w-32 h-16 text-black text-3xl rounded-lg justify-center flex items-center" style={{backgroundColor:'#32ADE6'}}></i>
+      <i className="flex items-center justify-center w-32 h-16 text-3xl text-black rounded-lg bi bi-buildings-fill" style={{backgroundColor:'#32ADE6'}}></i>
         <div className="info-right">
           <h6 className="title">100+</h6>
           <span>Online Course</span>
@@ -108,7 +110,7 @@ export default function Homecomponent(){
          </div>
   {/* banner area end */}
  
-  <div className="flex my-24 justify-center">
+  <div className="flex justify-center my-24">
     <div>
         <h3>try by:</h3>
     </div>
@@ -213,7 +215,7 @@ export default function Homecomponent(){
         <div className="col-lg-6 pl--90 pl_md--15 mt_md--50 pl_sm--15 pt_sm--50">
           <div className="title-area-left-style">
             <div className="pre-title">
-            <i className="bi bi-lightbulb mr-1" style={{color:'white'}}></i>
+            <i className="mr-1 bi bi-lightbulb" style={{color:'white'}}></i>
               <span>Tại sao chọn chúng tôi</span>
             </div>
             <h2 className="title">
@@ -387,7 +389,7 @@ export default function Homecomponent(){
         <div className="col-lg-12">
           <div className="title-area-center-style">
             <div className="pre-title">
-            <i className="bi bi-lightbulb mr-1" style={{color:'#32ADE6'}}></i>
+            <i className="mr-1 bi bi-lightbulb" style={{color:'#32ADE6'}}></i>
             <span>Student Review</span>
             </div>
             <h2 className="title">Our Students Feedback</h2>

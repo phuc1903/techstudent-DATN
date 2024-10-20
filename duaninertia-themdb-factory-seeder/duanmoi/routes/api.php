@@ -64,10 +64,18 @@ use App\Models\SoLuongDangKy;
 
 
 
+Route::get("/allkhoahoc", function () {
+    $khoahocCollection = KhoaHoc::with(['giangvien.nguoidung', 'chude', 'theloaicon'])->get();
 
-Route::get ("/allkhoahoc", function () {
-    $khoahoc = KhoaHoc::get();
-    return TatCaKhoaHoc::collection($khoahoc);
+    // Fetch dangky and baihocs data for each khoahoc
+    $khoahocCollection->each(function ($khoahoc) {
+        $khoahoc->dangky = ThanhToan::where('id_khoahoc', $khoahoc->id)->get();
+        $khoahoc->baihocs = BaiHoc::where('id_khoahoc', $khoahoc->id)->get();
+    });
+
+    return TatCaKhoaHoc::collection($khoahocCollection->map(function ($khoahoc) {
+        return new TatCaKhoaHoc($khoahoc, $khoahoc->dangky, $khoahoc->baihocs);
+    }));
 });
 
 
