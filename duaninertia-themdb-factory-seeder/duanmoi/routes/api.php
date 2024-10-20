@@ -64,6 +64,10 @@ use App\Models\SoLuongDangKy;
 
 
 
+Route::get ("/allkhoahoc", function () {
+    $khoahoc = KhoaHoc::get();
+    return KhoaHocApiResource::collection($khoahoc);
+});
 
 
 Route::get('/theloai', function () {
