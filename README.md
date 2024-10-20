@@ -12,3 +12,6 @@ yarn dev
 pnpm dev
 # or
 bun dev
+
+chạy backend php artisan serve
+chạy giao diện trogn backend npm run dev
