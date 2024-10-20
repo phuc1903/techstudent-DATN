@@ -4,11 +4,10 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bước 1:
+clone tất cả về
+bước 2:
+npm i
+bước 3:
+npm run dev là chạy đc 
+:))
