@@ -32,14 +32,19 @@ class TatCaKhoaHoc extends JsonResource
 
         return [
             "id" => $this->id,
-            "ten" => $this->ten,
-            "hinh" => $this->hinh,
-            "gia" => $this->gia,
-            "giamgia" => $this->giamgia,
-            "chude" => $this->chude->ten,
-            "giangvien" => $this->giangvien->ten,
+            "ten" => $this->ten ?? 'N/A',
+            "hinh" => $this->hinh ?? 'N/A',
+            "gia" => $this->gia ?? 0,
+            "giamgia" => $this->giamgia ?? 0,
+            "chude" => $this->chude->ten ?? 'N/A',
+            "theloai" => $this->theloaicon->ten ?? 'N/A',
+            "giangvien" => $this->giangvien->ten ?? 'N/A',
             "dangky" => $filteredDangky->count(),
-            "baihocs" => $this-> baihocs->count(),
+            "baihocs" => $this->baihocs->count(),
         ];
+        // return parent::toArray($request) + [
+        //     "dangky" => $filteredDangky->count(),
+        //     "baihocs" => $this->baihocs->count(),
+        // ];
     }
 }
