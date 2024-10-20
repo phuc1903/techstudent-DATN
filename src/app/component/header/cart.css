@@ -207,3 +207,18 @@ p{
 #panel-header{
     color: #32ADE6;
 }
+.header-user{
+
+    display: none;
+    width: 300px;
+    height: 550px;
+    background-color: white;
+    
+}
+.div-imguser:hover{
+    cursor: pointer;
+    .header-user{
+        display: block;
+    }
+}
+

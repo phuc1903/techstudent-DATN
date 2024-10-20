@@ -1,8 +1,16 @@
+"use client"
+import { useRouter } from "next/navigation";
 import React from "react";
 
 
 
+
+
 const Cart =({onAction}) =>{
+    const router = useRouter();
+    const openCart =() =>{
+        router.push('/page/cart')
+    }
     return(
         <div className='poputcart' >
             <div className="trong" onClick={onAction}>
@@ -276,7 +284,7 @@ const Cart =({onAction}) =>{
                   </div>
                   <div className='w-full '>
                     <button className='btn-thanhtoan '>tiến hành thanh toán</button>
-                    <button className='btn-cart '> xem giỏ hàng</button>
+                    <button className='btn-cart ' onClick={() =>openCart()}> xem giỏ hàng</button>
                   </div>
                 </div>
             </div>

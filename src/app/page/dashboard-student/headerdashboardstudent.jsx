@@ -11,13 +11,11 @@ const Headerdashboardstudent1=()=>{
         <div className="col-lg-12">
           <div className="dashboard-banner-area-start bg_image  student-dashboard">
             <div className="rating-area-banner-dashboard">
-              <a href="become-instructor.html" className="create-btn">
-                <i className="fa-regular fa-circle-plus" /> Become an Instructor
-              </a>
+             
             </div>
             <div className="author-profile-image-and-name">
               <div className="profile-pic">
-                <img src="assets/images/dashboard/04.png" alt="dashboard" />
+                <img src="assets/images/dashboard/04.png" alt="dashboard"  />
               </div>
               <div className="name-desig">
                 <h1 className="title">Jon Adam</h1>

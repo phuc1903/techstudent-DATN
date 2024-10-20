@@ -26415,6 +26415,14 @@ edit .quantity-edit button {
 .dashboard-banner-area-start.student-dashboard {
   background-image: url(../images/dashboard/05.jpg);
 }
+
+@media only screen and (max-width: 575px) {
+  .dashboard-banner-area-start.student-dashboard {
+    background-image: url(../images/dashboard/05.jpg);
+    height: 200px;
+  }
+}
+
 .dashboard-banner-area-start.student-dashboard .rating-area-banner-dashboard {
   right: 28%;
 }

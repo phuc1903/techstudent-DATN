@@ -53,6 +53,9 @@ export default function Header(){
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+  const test=()=>{
+    alert("test")
+  }
 
 useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -537,228 +540,21 @@ useEffect(() => {
                       Trang tính
                     </a>
                     <ul className="submenu">
-                      <li className="sub-dropdown">
+                      <li >
                         <a className="submenu-link" href={"/page/dashboard-student"}>
                           trang tính học viên
                         </a>
-                        <ul className="submenu third-lvl base">
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="dashboard.html"
-                            >
-                              Dashboard
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="my-profile.html"
-                            >
-                              My Profile
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="enroll-course.html"
-                            >
-                              Enroll Course
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="wishlist.html"
-                            >
-                              Wishlist
-                            </a>
-                          </li>
-                          <li>
-                            <a className="mobile-menu-link" href="reviews.html">
-                              Reviews
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="quick-attempts.html"
-                            >
-                              Quick Attempts
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="order-history.html"
-                            >
-                              Order History
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="question-answer.html"
-                            >
-                              Question Answer
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="calender.html"
-                            >
-                              Calender
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="my-course.html"
-                            >
-                              My Course
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="announcement.html"
-                            >
-                              Announcement
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="assignments.html"
-                            >
-                              Assignments
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="certificate.html"
-                            >
-                              Certificate
-                            </a>
-                          </li>
-                        </ul>
+                       
                       </li>
-                      <li className="sub-dropdown">
-                        <a className="submenu-link" href="javascript:void(0);">
-                          Students Dashboard
+                      <li >
+                        <a className="submenu-link" href={"/page/lecturer-dashboard"}>
+                          Trang tính giảng viên
                         </a>
-                        <ul className="submenu third-lvl base">
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="student-dashboard.html"
-                            >
-                              Dashboard
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="student-profile.html"
-                            >
-                              My Profile
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="student-enroll-course.html"
-                            >
-                              Enroll Course
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="student-wishlist.html"
-                            >
-                              Wishlist
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="student-reviews.html"
-                            >
-                              Reviews
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="student-quick-attempts.html"
-                            >
-                              Quick Attempts
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="student-order-history.html"
-                            >
-                              Order History
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="student-question-answer.html"
-                            >
-                              Question Answer
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="student-calender.html"
-                            >
-                              Calender
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              className="mobile-menu-link"
-                              href="student-settings.html"
-                            >
-                              Student Settings
-                            </a>
-                          </li>
-                        </ul>
+                      
                       </li>
                     </ul>
                   </li>
-                  {/* <li className="has-dropdown">
-                    <a className="nav-link" href="#">
-                      Blog
-                    </a>
-                    <ul className="submenu">
-                      <li>
-                        <a href="blog.html">Blog</a>
-                      </li>
-                      <li>
-                        <a href="blog-grid.html">Blog Grid</a>
-                      </li>
-                      <li>
-                        <a href="blog-list.html">Blog List</a>
-                      </li>
-                      <li>
-                        <a href="blog-right-sidebar.html">Blog Right Sidebar</a>
-                      </li>
-                      <li>
-                        <a href="blog-left-sidebar.html">Blog Left Sidebar</a>
-                      </li>
-                      <li>
-                        <a href="blog-details.html">Blog Details</a>
-                      </li>
-                    </ul>
-                  </li> */}
+                 
                 </ul>
               </nav>
             </div>
@@ -782,12 +578,39 @@ useEffect(() => {
                 </div>
               </div>
               <div className="buttons-area">
-                <a href={"/page/login"} className="rts-btn btn-border">
+                {/* <a href={"/page/login"} className="rts-btn btn-border">
                   Log In
                 </a>
                 <a href="registration.html" className="rts-btn btn-primary">
                   Sign Up
+                </a> */}
+                 <a href={"/page/login"} className="rts-btn btn-border">
+                 Đăng xuất
                 </a>
+                <div className='flex items-center'>
+                  <div className='mr-4'>
+                    <p className='m-0 p-0 bg-cyan-200 text-center rounded-lg'>Giảng viên</p>
+                  </div>
+                  <div className='relative div-imguser'>
+                  <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1728130178/01_vqeuoq.jpg" alt="" className='h-14 w-14 rounded-full' />
+                  <div className='absolute right-0 header-user border'>
+                      <div className='flex items-center justify-center py-6 border-b'>
+                          <div className='mr-4'>
+                          <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1728130178/01_vqeuoq.jpg" alt="" className='h-16 w-16 rounded-full' />
+
+                          </div>
+                          <div>
+                            <p>nguyen van a</p>
+                            
+                          </div>
+                         
+                      </div>
+                      <div>
+                            <button onClick={()=>test()}>click meme</button>
+                          </div>
+                  </div>
+                  </div>
+                </div>
               </div>
               <div className="menu-btn" id="menu-btn" onClick={() =>openheader2()}>
                 <svg
@@ -824,6 +647,29 @@ useEffect(() => {
                  </div>
               </div>
               <div>
+        <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel-header"
+          className='AccordionSummary'
+        >
+         <div className='flex items-center'>
+         <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1728130178/01_vqeuoq.jpg" alt="" className='h-16 w-16 rounded-full' />
+          <p className='ml-4'>nguyen van a</p>
+         </div>
+        </AccordionSummary>
+        <AccordionDetails>
+          <a href="">đăng xuất</a>
+
+        </AccordionDetails>
+         <AccordionDetails>
+          <a href="">cài đặt</a>
+
+        </AccordionDetails>
+      </Accordion>
+
+
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
