@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Resources\ApiResource;
+use App\Http\Resources\TatCaKhoaHoc;
 use App\Http\Resources\GiangVienApiResource;
 use App\Http\Resources\KhoaHocApiResource;
 use App\Http\Resources\RegisterApiResource;
@@ -66,7 +67,7 @@ use App\Models\SoLuongDangKy;
 
 Route::get ("/allkhoahoc", function () {
     $khoahoc = KhoaHoc::get();
-    return KhoaHocApiResource::collection($khoahoc);
+    return TatCaKhoaHoc::collection($khoahoc);
 });
 
 
