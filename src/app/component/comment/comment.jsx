@@ -19,7 +19,7 @@ const Commenthome = () => {
 
         fetchData();
     }, []);
-    console.log("danhgia",DanhGia);
+    // console.log("danhgia",DanhGia);
     
     
 

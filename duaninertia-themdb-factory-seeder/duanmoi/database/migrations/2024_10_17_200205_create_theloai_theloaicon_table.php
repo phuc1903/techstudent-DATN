@@ -16,6 +16,7 @@ class CreateTheloaiTheloaiconTable extends Migration
         Schema::create('theloai_theloaicon', function (Blueprint $table) {
             $table->id(); // This creates an unsigned big integer column
             $table->string('ten', 255);
+            $table->string('hinh', 255)->nullable();
             $table->unsignedBigInteger('id_theloai')->nullable(); // Set a default value
             $table->timestamps(); // This should create both 'created_at' and 'updated_at' columns
             $table->engine = 'InnoDB';

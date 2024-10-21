@@ -80,9 +80,13 @@ Route::get("/allkhoahoc", function () {
 
 
 Route::get('/theloai', function () {
-    $results = TheLoai::with(['theloaicons.chudes'])->get();
+    $results = TheLoai::with(['theloaicons.chudes', 'chudes'])
+    ->whereHas('theloaicons')
+    ->get();
     return ApiResource::collection($results);
 });
+
+
 Route::get('chude', function () {
     $chude = ChuDe::get();
     return ChuDeApiResource::collection($chude);
@@ -190,10 +194,10 @@ Route::get('Khoahocchitiet/{id}', function ($id) {
     $theLoai = TheLoai::with(['theloaicons.chudes'])->get();
     $baihoc = BaiHoc::with(['video'])->get();
     $danhgia = DanhGia::where('id_khoahoc', $id)->get();
-
+    $trinhdo = TrinhDo::where('id_khoahoc', $id)->first();
     if ($khoaHoc) {
         return response()->json([
-            'khoahoc' => new KhoaHocChiTietApi($khoaHoc, $theLoai, $baihoc, $danhgia),
+            'khoahoc' => new KhoaHocChiTietApi($khoaHoc, $theLoai, $baihoc, $danhgia, $trinhdo),
         ]);
     }
 

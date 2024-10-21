@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Subcategory, Category } from "../category/category.component";
+import Link from "next/link";
 
 // import { Coursesoutstanding,Coursenew } from "@/app/service/course/course.service";
 
@@ -17,7 +18,7 @@ const OutstandingCourse = () => {
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-  console.log(KhoaHoc);
+  // console.log(KhoaHoc);
   
 
   return (
@@ -35,9 +36,11 @@ const OutstandingCourse = () => {
             <div className="portfolio_wrap">
               <div className="filter row g-5 mt--20 portfolio-feed personal">
                 {KhoaHoc.map((item, index) => (
+              
                   <div
                     className="transition flash grid-item-p element-item creative col-xl-3 col-lg-4 col-md-6 col-sm-6"
                     data-category="transition">
+                    <Link href={`/page/course-detail?id=${item.id}`}>
                     <div className="rts-single-course">
                       <a href={"/page/course-detail"} className="thumbnail">
                         <img src={item.hinh} alt="course" />
@@ -50,7 +53,7 @@ const OutstandingCourse = () => {
                       </div>
                       <div className="tags-area-wrapper">
                         <div className="single-tag">
-                          <span>{item.chude.ten}</span>
+                          <span>{item.chude}</span>
                         </div>
                       </div>
                       <div className="lesson-studente">
@@ -96,8 +99,10 @@ const OutstandingCourse = () => {
                         </div>
                       </div>
                     </div>
-                    {/* rts single course end */}
-                  </div>
+        
+                    </Link>
+                    </div>
+        
                 ))}
               </div>
             </div>

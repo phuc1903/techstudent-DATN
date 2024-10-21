@@ -7,16 +7,18 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class KhoaHocChiTietApi extends JsonResource
 {
-    protected $theloai; 
+    protected $theloai;
     protected $baihoc;
     protected $danhgia;
+    protected $trinhdo;
 
-    public function __construct($resource, $theloai, $baihoc, $danhgia)
+    public function __construct($resource, $theloai, $baihoc, $danhgia, $trinhdo)
     {
         parent::__construct($resource);
         $this->theloai = $theloai;
         $this->baihoc = $baihoc;
         $this->danhgia = $danhgia;
+        $this->trinhdo = $trinhdo;
     }
 
     /**
@@ -42,6 +44,7 @@ class KhoaHocChiTietApi extends JsonResource
             }
         }
 
+        $baihoc = 'Default topic';
         foreach ($this->baihoc as $baihocItem) {
             if ($baihocItem->id_khoahoc == $this->id) {
                 $baihoc = $baihocItem;
@@ -49,7 +52,7 @@ class KhoaHocChiTietApi extends JsonResource
             }
         }
 
-         $danhgia = $this->danhgia->map(function ($danhgiaItem) {
+        $danhgia = $this->danhgia->map(function ($danhgiaItem) {
             return [
                 'id' => $danhgiaItem->id,
                 'id_khoahoc' => $danhgiaItem->id_khoahoc,
@@ -58,7 +61,9 @@ class KhoaHocChiTietApi extends JsonResource
                 'user' => $danhgiaItem->nguoidung->ho . ' ' . $this->giangvien->nguoidung->ten ?? 'Anonymous',
             ];
         });
-        
+
+   
+     
 
         return [
             'id' => $this->id,
@@ -73,8 +78,9 @@ class KhoaHocChiTietApi extends JsonResource
             'chude' => $this->chude->ten ?? 'Default topic',
             'theloai' => $theloaiName,
             'theloaicon' => $theloaiconName,
-            'baihocs' => $baihoc ?? 'Default topic',
-            'danhgia' =>  $danhgia?? 'Default topic',
+            'baihocs' => $baihoc,
+            'danhgia' => $danhgia,
+            'trinhdo' => $this->trinhdo->ten ?? 'Default level',
             'baihocs' => $this->baihocs->map(function ($baihoc) {
                 return [
                     'id' => $baihoc->id,
@@ -89,6 +95,7 @@ class KhoaHocChiTietApi extends JsonResource
                     }),
                 ];
             }),
+            "created_at" => $this->created_at,
         ];
     }
 }

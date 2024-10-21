@@ -14,8 +14,9 @@ class CreateChudeTable extends Migration
     public function up()
     {
         Schema::create('chude', function (Blueprint $table) {
-            $table->id(); 
+            $table->id();
             $table->string('ten', 255);
+            $table->string('hinh', 255)->nullable();
             $table->string('mota', 225)->nullable();
             $table->integer('id_theloaicon');
             $table->timestamps();

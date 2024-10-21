@@ -1,7 +1,97 @@
-import React from "react";
+"use client";
+import React , {useState , useEffect} from "react";
 import Header from "../../component/header/header";
 import Footercomponent from "../../component/footer/footer";
-export default function Coursedetailcomponent(){
+import { CourseDetails } from '../../../../src/service/course/course.service';
+
+
+
+
+export default function Coursedetailcomponent() {
+  const [id, setId] = useState(null);
+  const [course, setCourse] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const id = queryParams.get('id');
+    setId(id);
+  }, []);
+
+  useEffect(() => {
+    if (id) {
+      setLoading(true);
+      CourseDetails(id)
+        .then((res) => {
+          setCourse(res.khoahoc);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setError(err);
+          setLoading(false);
+        });
+    }
+  }, [id]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading course: {error.message}</div>;
+  }
+console.log(course.ten);
+  const gia = course.gia;
+  const giamgia = course.giamgia;
+  const percentageDiscount = ((gia - giamgia) / gia) * 100;
+  //thoigian
+  function timeToSeconds(timeStr) {
+    const [hours, minutes, seconds] = timeStr.split(':').map(Number);
+    return hours * 3600 + minutes * 60 + seconds;
+  }
+
+  // Chuyển đổi từ giây sang định dạng HH:MM:SS
+  function secondsToTime(totalSeconds) {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  }
+
+  const timeArray = [];
+  let totalTime = 0; // Initialize totalTime
+
+  // Mảng các thời gian dưới dạng HH:MM:SS
+  if (Array.isArray(course.baihocs)) {
+    course.baihocs.forEach((lesson) => {
+      if (Array.isArray(lesson.video)) {
+        lesson.video.forEach((videoItem) => {
+          totalTime += timeToSeconds(videoItem.thoiluong); // Ensure thoiluong is in HH:MM:SS format
+          timeArray.push(videoItem.thoiluong);
+        });
+      }
+    });
+  }
+
+  let totalSeconds = 0;
+
+  // Vòng lặp để cộng tổng thời gian
+  timeArray.forEach(time => {
+    totalSeconds += timeToSeconds(time);
+  });
+
+  // Chuyển tổng số giây thành định dạng HH:MM:SS
+  const formattedTotalTime = secondsToTime(totalSeconds);
+
+  console.log(formattedTotalTime);
+
+
+  const firstVideo = course.baihocs[0]?.video[0];
+
+  
+
+
     return(
         <div className="mt-32">
             <Header/>
@@ -21,7 +111,7 @@ export default function Coursedetailcomponent(){
               </a>
             </div>
             <h1 className="title">
-              The Complete Web Developer in <br /> 2024: Zero to Mastery
+                      {course.ten}<br /> 2024: Zero to Mastery
             </h1>
             <div className="rating-area">
               <div className="stars-area">
@@ -45,12 +135,12 @@ export default function Coursedetailcomponent(){
               <div className="author">
                 {/* <img src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1728959336/01_w5siua.jpg" alt="breadcrumb" /> */}
                 <h6 className="name">
-                  <span>By</span> William U.
+                          <span>By</span>{course.giangvien}.
                 </h6>
               </div>
               <p>
                 {" "}
-                <span>Categories: </span> Web Developments
+                <span>Categories: </span> {course.chude}
               </p>
             </div>
           </div>
@@ -66,7 +156,7 @@ export default function Coursedetailcomponent(){
   >
     <div className="container" style={{ transform: "none" }}>
       <div className="row g-5" style={{ transform: "none" }}>
-        <div className="col-lg-8 order-cl-1 order-lg-1 order-md-2 order-sm-2 order-2">
+        <div className="order-2 col-lg-8 order-cl-1 order-lg-1 order-md-2 order-sm-2">
           <div className="course-details-btn-wrapper pb--50">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
               <li className="nav-item" role="presentation">
@@ -134,8 +224,10 @@ export default function Coursedetailcomponent(){
               role="tabpanel"
               aria-labelledby="home-tab"
             >
-              <div className="course-content-wrapper">
-                <h5 className="title">About Course</h5>
+                      <div className="course-content-wrapper">
+                     <h5 className="title">About Course</h5>
+                        {course.mota}
+                {/* <h5 className="title">About Course</h5>
                 <p className="disc">
                   If filmmaking is your passion but you never went to film
                   school you’ve come to the right place. Here, you will get
@@ -196,7 +288,7 @@ export default function Coursedetailcomponent(){
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div
@@ -1058,13 +1150,13 @@ export default function Coursedetailcomponent(){
           </div>
           <div className="wrapper-bottom-course-details-page g-5 row mt--50 pr--60 pr_sm--0 pl_sm--0">
             <div className="title-between-area pr--150">
-              <h5 className="title mb-0">More Courses by William U.</h5>
-              <a href="#" className="rts-btn with-arrow p-0">
+              <h5 className="mb-0 title">More Courses by William U.</h5>
+              <a href="#" className="p-0 rts-btn with-arrow">
                 View All Course <i className="fa-light fa-arrow-right" />
               </a>
             </div>
             {/* các khóa học khác của giảng viên này */}
-           <div className="flex overflow-x-scroll gap-4">
+           <div className="flex gap-4 overflow-x-scroll">
            <div className="col-lg-5 col-md-6 col-sm-12">
               <div className="rts-single-course">
                 <a href="single-course.html" className="thumbnail">
@@ -1265,7 +1357,7 @@ export default function Coursedetailcomponent(){
           </div>
         </div>
         <div
-          className="col-lg-4 order-cl-2 order-lg-2 order-md-1 order-sm-1 order-1  rts-sticky-column-item"
+          className="order-1 col-lg-4 order-cl-2 order-lg-2 order-md-1 order-sm-1 rts-sticky-column-item"
           style={{
             position: "relative",
             overflow: "visible",
@@ -1293,18 +1385,18 @@ export default function Coursedetailcomponent(){
               <div className="course-side-bar">
                 <div className="thumbnail">
                   <img src="assets/images/course/20.jpg" alt="" />
-                  <div className="vedio-icone">
-                  <iframe
-                        height="250px"
-                        src="https://www.youtube.com/embed/fPL3-cODrVU?si=8Nz05i6TzsiG7WpY"
-                        title="YouTube video player"
-                        frameBorder="0"  // Thay đổi ở đây
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerPolicy="strict-origin-when-cross-origin"  // Thay đổi ở đây
-                        allowFullScreen  // Thay đổi ở đây
-                        >
-
-                    </iframe>
+                          <div className="vedio-icone">
+                            {firstVideo && (
+                              <iframe
+                                height="250px"
+                                src={`https://www.youtube.com/embed/${firstVideo.url_link}?enablejsapi=1`}
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                allowFullScreen
+                              />
+                            )}
 
                     <div className="video-overlay">
                       <a className="video-overlay-close">×</a>
@@ -1312,9 +1404,9 @@ export default function Coursedetailcomponent(){
                   </div>
                 </div>
                 <div className="price-area">
-                  <h3 className="title animated fadeIn">$39.99</h3>
-                  <h4 className="none">$79.99</h4>
-                  <span className="discount">-50%</span>
+                          <h3 className="title animated fadeIn">${course.giamgia}</h3>
+                          <h4 className="line-through none">${course.gia}</h4>
+                          <span className="discount">-{percentageDiscount.toFixed(2)}%</span>
                 </div>
                 <div className="clock-area">
                   <i className="fa-light fa-clock" />
@@ -1326,7 +1418,7 @@ export default function Coursedetailcomponent(){
                 <a href="#" className="rts-btn btn-border">
                   Buy Now
                 </a>
-                <div className="what-includes">
+                <div className="p-1 font-bold text-black what-includes">
                   <span className="m">30-Day Money-Back Guarantee</span>
                   <h5 className="title">This course includes: </h5>
                   <div className="single-include">
@@ -1335,7 +1427,7 @@ export default function Coursedetailcomponent(){
                       <span>Levels</span>
                     </div>
                     <div className="right">
-                      <span>Beginner</span>
+                              <span>{ course.trinhdo}</span>
                     </div>
                   </div>
                   <div className="single-include">
@@ -1344,7 +1436,9 @@ export default function Coursedetailcomponent(){
                       <span>Duration</span>
                     </div>
                     <div className="right">
-                      <span>6 hours 56 minutes</span>
+                              <span>
+                                {formattedTotalTime}
+                              </span>
                     </div>
                   </div>
                   <div className="single-include">
@@ -1353,7 +1447,7 @@ export default function Coursedetailcomponent(){
                       <span>Subject</span>
                     </div>
                     <div className="right">
-                      <span>Web Development</span>
+                              <span>  {course.chude}</span>
                     </div>
                   </div>
                   <div className="single-include">
@@ -1362,7 +1456,7 @@ export default function Coursedetailcomponent(){
                       <span>Update</span>
                     </div>
                     <div className="right">
-                      <span>29 October, 2023 Last Update</span>
+                              <span>{course.created_at}</span>
                     </div>
                   </div>
                   <div className="single-include">
@@ -1385,13 +1479,9 @@ export default function Coursedetailcomponent(){
                 <div className="course-single-information">
                   <h5 className="title">A course by</h5>
                   <div className="body">
-                    <div className="author">
+                    <div className="font-normal text-black">
                       <img src="assets/images/course/13.png" alt="" />
-                      <span>Dr. Angela Yu</span>
-                    </div>
-                    <div className="author">
-                      <img src="assets/images/course/13.png" alt="" />
-                      <span>Mr. John Yu</span>
+                              <span>{course.giangvien}</span>
                     </div>
                   </div>
                 </div>
@@ -1452,12 +1542,8 @@ export default function Coursedetailcomponent(){
                   <div className="body">
                     <div className="tags-wrapper">
                       {/* single tags */}
-                      <span>Course</span>
-                      <span>Design</span>
-                      <span>Web development</span>
-                      <span>Business</span>
-                      <span>UI/UX</span>
-                      <span>Financial</span>
+                              <span>{course.chude}</span>
+                     
                       {/* single tags end */}
                     </div>
                   </div>
@@ -1582,14 +1668,14 @@ export default function Coursedetailcomponent(){
     </div>
   </div>
   {/* course details area end */}
-  <div className="rts-section-gapBottom  rts-feature-course-area">
+  <div className="rts-section-gapBottom rts-feature-course-area">
     <div className="container">
       <div className="row">
         <div className="col-lg-12">
           <div className="title-between-area">
             <div className="title-area-left-style">
               <div className="pre-title">
-              <i className="bi bi-lightbulb mr-1" style={{color:'#32ADE6'}}></i>
+              <i className="mr-1 bi bi-lightbulb" style={{color:'#32ADE6'}}></i>
               <span>More Similar Courses</span>
               </div>
               <h2 className="title">Related Courses</h2>
@@ -1600,7 +1686,7 @@ export default function Coursedetailcomponent(){
       <div className="row mt--50 ">
         <div className="col-lg-12">
           <div
-            className="swiper swiper-float-right-course swiper-data swiper-initialized swiper-horizontal swiper-pointer-events overflow-x-scroll"
+            className="overflow-x-scroll swiper swiper-float-right-course swiper-data swiper-initialized swiper-horizontal swiper-pointer-events"
            
           >
             <div

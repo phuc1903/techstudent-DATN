@@ -18,8 +18,15 @@ class ApiResource extends JsonResource
         return [
             'id' => $this->id,
             'ten' => $this->ten,
+            'hinh' => $this->hinh,
             'theloaicons' => $this->whenLoaded('theloaicons', function () {
-                return ApiResource::collection($this->theloaicons);
+                return $this->theloaicons->map(function ($theloaicon) {
+                    return [
+                        'id' => $theloaicon->id,
+                        'ten' => $theloaicon->ten,
+                        'chudes' => ApiResource::collection($theloaicon->chudes),
+                    ];
+                });
             }),
             'chudes' => $this->whenLoaded('chudes', function () {
                 return ApiResource::collection($this->chudes);

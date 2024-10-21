@@ -14,8 +14,10 @@ class TheLoai extends Model
     protected $fillable = [
         'id',
         'ten',
+        'hinh',
+        'id_theloai',
     ];
-    
+
     public function theloaicons()
     {
         return $this->hasMany(TheLoaiCon::class, 'id_theloai');

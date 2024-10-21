@@ -14,6 +14,7 @@ class ChuDe extends Model
     protected $fillable = [
         'id',
         'ten',
+        'hinh',
         'id_theloaicon',
     ];
 
