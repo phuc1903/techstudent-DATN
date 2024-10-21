@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Resources\ApiResource;
+use App\Http\Resources\TatCaKhoaHoc;
 use App\Http\Resources\GiangVienApiResource;
 use App\Http\Resources\KhoaHocApiResource;
 use App\Http\Resources\RegisterApiResource;
@@ -63,7 +64,19 @@ use App\Models\SoLuongDangKy;
 
 
 
+Route::get("/allkhoahoc", function () {
+    $khoahocCollection = KhoaHoc::with(['giangvien.nguoidung', 'chude', 'theloaicon'])->get();
 
+    // Fetch dangky and baihocs data for each khoahoc
+    $khoahocCollection->each(function ($khoahoc) {
+        $khoahoc->dangky = ThanhToan::where('id_khoahoc', $khoahoc->id)->get();
+        $khoahoc->baihocs = BaiHoc::where('id_khoahoc', $khoahoc->id)->get();
+    });
+
+    return TatCaKhoaHoc::collection($khoahocCollection->map(function ($khoahoc) {
+        return new TatCaKhoaHoc($khoahoc, $khoahoc->dangky, $khoahoc->baihocs);
+    }));
+});
 
 
 Route::get('/theloai', function () {
