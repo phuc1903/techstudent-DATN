@@ -173,6 +173,10 @@ Route::get('Khoahoctheloaicon/{id}', function ($id) {
     return response()->json([], 404);
 });
 
+Route::get("danhgia", function () {
+    $danhgia = DanhGia::with(['nguoidung', 'khoahoc'])->get();
+    return DanhGiaApiResource::collection($danhgia);
+});
 
 
 

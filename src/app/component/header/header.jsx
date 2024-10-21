@@ -58,7 +58,7 @@ useEffect(() => {
   <title>Techstudent &amp;  </title>
   {/* <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.png" /> */}
 
-  <header className="header-one header--sticky fixed top-0 ">
+  <header className="fixed top-0 header-one header--sticky ">
 
     {visible && (
       <div className="scroll" onClick={scrollToTop}>
@@ -745,15 +745,15 @@ useEffect(() => {
                 <div className="search-btn" id="search">
                 <i className="bi bi-search search" style={{color:'#32ADE6', fontSize:'20px',fontWeight:'bold'}}></i>
                 </div>
-                <div className='cart cart-icon relative'>
+                <div className='relative cart cart-icon'>
                 <i className="fa-sharp fa-light fa-bookmark" style={{color:'#32ADE6', fontSize:'20px'}} />
-                <div className='absolute carthover w-32 h-16 border rounded-md hidden group-hover:block'>
+                <div className='absolute hidden w-32 h-16 border rounded-md carthover group-hover:block'>
                     <p>yêu thích</p>
                   </div>
                 </div>
-                <div className="cart cart-icon relative">
+                <div className="relative cart cart-icon">
                   <i className="fa-regular fa-cart-shopping" onClick={clickopencart} />
-                  <div className='absolute carthover w-28 h-16 border rounded-md hidden group-hover:block'>
+                  <div className='absolute hidden h-16 border rounded-md carthover w-28 group-hover:block'>
                     <p>giỏ hàng</p>
                   </div>
                 </div>
@@ -789,7 +789,7 @@ useEffect(() => {
     {/* header two */}
 
     {header2 && (
-        <div className='header-two absolute right-0 border top-0 h-lvh flex'>
+        <div className='absolute top-0 right-0 flex border header-two h-lvh'>
         <div className='blur' onClick={()=>closeheader2()}>
 
         </div>
@@ -797,7 +797,7 @@ useEffect(() => {
               <div className='div-close-header'>
 
                  <div className='close-header' onClick={() =>closeheader2()}>
-                 <i className="bi bi-x-lg p-4 "></i>
+                 <i className="p-4 bi bi-x-lg "></i>
                  </div>
               </div>
               <div>

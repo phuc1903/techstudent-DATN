@@ -16,9 +16,9 @@ class DanhGiaApiResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'noi_dung' => $this->noidung, // Corrected from binhluan to noidung
+            'noi_dung' => $this->binhluan, // Corrected from binhluan to noidung
             'so_sao' => $this->danhgia,
-            'nguoi_danh_gia' => $this->id_nguoidung, // Corrected from id_khoahoc to id_nguoidung
+            'nguoi_danh_gia' => $this->nguoidung, // Corrected from id_khoahoc to id_nguoidung
             'ngay_danh_gia' => $this->created_at, // Assuming created_at is the date of the review
         ];
     }

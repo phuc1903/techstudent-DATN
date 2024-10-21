@@ -4,10 +4,7 @@ import React, { useEffect, useState }  from 'react';
 import { Categorydata } from '../../../../src/service/category/category.service';
 
 const NextCategory =() =>{
-  
-
-  
-    const image =Categorydata()
+ const image =Categorydata()
     // const [currentIndex, setCurrentIndex] = useState(0);
     const [page,setPage] = useState(1);
     const [buttonnext,setButtonnext] = useState(true)
@@ -96,6 +93,23 @@ const NextCategory =() =>{
       return () => {
           window.removeEventListener('resize', handleResize);
       };
+    }, []);
+  
+  const [DanhMuc, setDanhMuc] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/theloai");
+        const data = await response.json();
+        console.log(data.data);
+        setDanhMuc(data.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
      
@@ -123,18 +137,21 @@ const NextCategory =() =>{
               <div className="w-full mt-10 text-center h-80">
               <div className={`small:grid-cols-1 small:gap-0 mobile:grid-cols-2 mobile:gap-2  md-600:grid-cols-3 md-600:gap-4 lg-900:grid-cols-4 lg-900:gap-6 xl:grid-cols-6 xl:gap-8 grid grid-cols-4 gap-8 ` } >
 
-          {/* <div className={` grid grid-cols-${columns} gap-${gap} ` } > */}
-              {img.map((item,index) =>(
-                  <div className="flex flex-col items-center bg-white border" key={index}>
-                  <div className="m-8 text-center ">
-                  <img src={item.image} alt="" 
-                  className="block mx-auto"
-                  />
-                   <h6 className="mt-8">{item.name}</h6>
-                   <p>130+ khóa học</p>
-                  </div>
-                 </div>
-              ))}
+                {/* <div className={` grid grid-cols-${columns} gap-${gap} ` } > */}
+                
+                {DanhMuc.map((item, index) => (
+                  item.theloaicons.map((theloaiItem, theloaiIndex) => (
+                    theloaiItem.chudes.map((chudeItem, chudeIndex) => (
+                      <div className="flex flex-col items-center bg-white border" key={`${index}-${theloaiIndex}-${chudeIndex}`}>
+                        <div className="m-8 text-center">
+                          <img src={chudeItem.image} alt="" className="block mx-auto" />
+                          <h6 className="mt-8">{chudeItem.ten}</h6>
+                          <p>130+ khóa học</p>
+                        </div>
+                      </div>
+                    ))
+                  ))
+                ))}
             
   
           </div>
@@ -248,51 +265,67 @@ const NextCategory =() =>{
           </div>
         )
   }
-//   const data:React.FC = () => {
-//     const datas = Categorydata()
-//     return([datas]
-        
-//     )
-// };
-  const Categoryheader =( ) =>{
-    const cate =Categorydata()
 
-    const midIndex = Math.ceil(cate.length / 2);
-    const cate1 = cate.slice(0, midIndex); // Mảng đầu tiên
-    const cate2 = cate.slice(midIndex);  
-    return (
-        <ul className="category-sub-menu">
-        <li>
-          <ul>
-            {cate1.map((item,index) =>(
-                <li key={index}>
-                <a href="#" className="menu-item cv w-96">
-                  <img src={item.image} alt="" />
+const Categoryheader = () => {
+  const [DanhMuc, setDanhMuc] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/theloai");
+        const data = await response.json();
+        console.log(data.data);
+        setDanhMuc(data.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const midIndex = Math.ceil(DanhMuc.length / 2);
+  const firstHalf = DanhMuc.slice(0, midIndex);
+  const secondHalf = DanhMuc.slice(midIndex);
+
+  return (
+    <ul className="category-sub-menu">
+      <li>
+        <ul className="category-list">
+          {firstHalf.map((item, index) => (
+            <li key={index}>
+              <a href="#" className="menu-item cv w-96">
+                {item.theloaicons && item.theloaicons.length === 0 ? (
                   <div className="text">
-                    <h4>{item.name}</h4>
+                    <h4>{item.ten}</h4>
                     <p>130+ Khóa học</p>
                   </div>
-                </a>
-              </li>
-            ))}
-          </ul>
-          <ul>
-            {cate2.map((item,index) =>(
-                 <li key={index}>
-                 <a href="#" className="menu-item cv w-96">
-                   <img src={item.image} alt="" />
-                   <div className="text">
-                     <h4>{item.name}</h4>
-                     <p>130+ Khóa học</p>
-                   </div>
-                 </a>
-               </li>
-            ))}
-          </ul>
-        </li>
-      </ul>
-    )
-  }
+                ) : null}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <ul>
+          {secondHalf.map((item, index) => (
+            <li key={index}>
+              <a href="#" className="menu-item cv w-96">
+                {/* <img src={item.image} alt="" /> */}
+                {item.theloaicons && item.theloaicons.length === 0 ? (
+                  <div className="text">
+                    <h4>{item.ten}</h4>
+                    <p>130+ Khóa học</p>
+                  </div>
+                ) : null}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </li>
+    </ul>
+  );
+};
+
+export default Categoryheader;
 
   const Subcategory=()=>{
     return(
