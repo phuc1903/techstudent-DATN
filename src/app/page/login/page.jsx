@@ -1,12 +1,8 @@
 "use client"
 
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-
-
-
-
 
 export default function Login() {
     const initialValues = { email: '', password: '', rememberMe: false };
@@ -20,8 +16,35 @@ export default function Login() {
             .required('mật khẩu k đc để trống'),
     });
 
-    const handleSubmit = (values) => {
-        console.log(values);
+    const handleSubmit = async (values, { setSubmitting }) => {
+        const data = {
+            email: values.email,
+            password: values.password,
+        };
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Login successful:', result);
+                localStorage.setItem('data', JSON.stringify(result.data));
+                window.location = '/';
+            } else {
+                const error = await response.json();
+                console.error('Login failed:', error);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     return (
@@ -36,7 +59,7 @@ export default function Login() {
                                 validationSchema={validationSchema}
                                 onSubmit={handleSubmit}
                             >
-                                {() => (
+                                {({ isSubmitting }) => (
                                     <Form>
                                         <div className="single-input-wrapper">
                                             <label htmlFor="email">Your Email</label>
@@ -64,7 +87,7 @@ export default function Login() {
                                                 <label htmlFor="type-1">Remember Me</label>
                                             </div>
                                         </div>
-                                        <button type="submit" className="rts-btn btn-primary">Login</button>
+                                        <button type="submit" className="rts-btn btn-primary" disabled={isSubmitting}>Login</button>
                                         <div className="google-apple-wrapper">
                                             <div className="google">
                                                 {/* <img src="assets/images/contact/06.png" alt="contact" /> */}
@@ -74,7 +97,7 @@ export default function Login() {
                                             </div>
                                         </div>
                                         <p>
-                                            Don&apos; t Have an account?{" "}
+                                            Don&apos;t Have an account?{" "}
                                             <a href="registration.html">Registration</a>
                                         </p>
                                     </Form>

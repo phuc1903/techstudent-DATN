@@ -26,6 +26,7 @@ use App\Http\Resources\KiemtraVideoApiResource;
 use App\Http\Resources\BaiHocApiResource;
 use App\Http\Resources\APIbaihoc;
 use App\Http\Resources\DanhGiaApiResource;
+use App\Http\Resources\khoahocdahocApiResource;
 
 
 use App\Http\Resources\Lecturer\ThemKhoaHocApiResource;
@@ -61,6 +62,7 @@ use App\Models\donhang;
 use App\Models\donhangchitiet;
 use App\Models\ThanhToan;
 use App\Models\SoLuongDangKy;
+use App\Models\KhoaHocDaHoc;
 
 
 
@@ -175,6 +177,21 @@ Route::get('Khoahoctheloaicon/{id}', function ($id) {
     }
 
     return response()->json([], 404);
+});
+Route::post("KhoaHocDaHoc", function (Request $request) {
+    $request = request()->validate([
+        'id_nguoidung' => 'required',
+    ]);
+
+    $khoahocdahoc = KhoaHocDaHoc::with(['khoahoc', 'nguoidung', 'chude'])->where('id_nguoidung', $request['id_nguoidung'])->get();
+    $baihoc = BaiHoc::whereIn('id_khoahoc', $khoahocdahoc->pluck('id_khoahoc'))->get();
+    $thanhtoan = ThanhToan::whereIn('id_khoahoc', $khoahocdahoc->pluck('id_khoahoc'))->get();
+    if ($khoahocdahoc->isNotEmpty()) {
+        return khoahocdahocApiResource::collection($khoahocdahoc->map(function ($item) use ($baihoc, $thanhtoan) {
+            return new khoahocdahocApiResource($item, $baihoc, $thanhtoan);
+        }));
+    }
+    return response()->json(["error" => "No records found"], 404);
 });
 
 Route::get("danhgia", function () {
@@ -545,6 +562,7 @@ Route::post('/xoagiohang', function (Request $request) {
         return response()->json(['error' => 'Đã xảy ra lỗi trong quá trình xóa giỏ hàng', 'message' => $e->getMessage()], 500);
     }
 });
+
 Route::post("/khoahocdadangky", function (Request $request) {
     $request->validate([
         'id_nguoidung' => 'required|exists:nguoidung,id', // Ensure id_nguoidung exists

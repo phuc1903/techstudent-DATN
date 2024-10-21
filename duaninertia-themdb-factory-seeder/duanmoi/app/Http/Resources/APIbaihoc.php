@@ -80,7 +80,9 @@ class APIbaihoc extends JsonResource
             'hinh' => $this->hinh,
             'trangthai' => $this->trangthai,
             'id_chude' => $this->id_chude,
+            'chude' => $this->chude->ten,
             'id_giangvien' => $this->id_giangvien,
+            'giangvien' => $this->giangvien->ten,   
             'baihoc1' => $baihoc1, // Include baihoc1 data here
             'video' => $video, // Include video data here
             'TongVideoIDCuatungBaiHoc' => $TongVideoIDCuatungBaiHoc, // Include TongVideoIDCuatungBaiHoc data here

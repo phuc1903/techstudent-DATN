@@ -24,4 +24,10 @@ class KhoaHocDaHoc extends Model
        return $this->belongsTo(NguoiDung::class,
             "id_nguoidung");
     }
+    public function chude(){
+        return $this->hasMany(DanhGia::class, "id_khoahoc");
+    }
+    public function baihoc(){
+        return $this->hasMany(BaiHoc::class, "id_khoahoc");
+    }
 }

@@ -34,13 +34,14 @@ class DangKyApiResource extends JsonResource
             $giangvien = $this->giangviens->firstWhere('id', $khoahoc->id_giangvien);
             $nguoidung = $this->all_users->firstWhere('id', $giangvien->id_nguoidung);
             $tenGiangVien = $nguoidung ? $nguoidung->ten : null;
-
+           
             // Lấy các bình luận liên quan đến khóa học
             $danhgia = $this->danhgia->where('id_khoahoc', $khoahoc->id)->map(function ($danhgia) {
                 return $danhgia->toArray();
             })->all();
 
             return array_merge($khoahoc->toArray(), [
+                'chuDe' => $khoahoc->chuDe->ten,
                 'tenGiangVien' => $tenGiangVien,
                 'danhgia' => $danhgia
             ]);
@@ -49,6 +50,8 @@ class DangKyApiResource extends JsonResource
         return [
             'id' => $this->id,
             'khoahocs' => $khoahocsArray,
+           
+            // 'giangvien' => $this->giangviens->map->toArray()->all(),
             'nguoidungs' => $this->nguoidungs->map->toArray()->all(),
             // 'giangviens' => $this->giangviens->map->toArray()->all(),
             // 'all_users' => $this->all_users->toArray(),
