@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Lecturer;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+
 class TrangDichController extends Controller
 {
     public function index()
