@@ -27,7 +27,7 @@ use App\Http\Resources\BaiHocApiResource;
 use App\Http\Resources\APIbaihoc;
 use App\Http\Resources\DanhGiaApiResource;
 use App\Http\Resources\khoahocdahocApiResource;
-
+use App\Http\Resources\Admin\Showbanner;
 
 use App\Http\Resources\Lecturer\ThemKhoaHocApiResource;
 use App\Http\Resources\Lecturer\GiangVienApiResourc;
@@ -63,6 +63,7 @@ use App\Models\donhangchitiet;
 use App\Models\ThanhToan;
 use App\Models\SoLuongDangKy;
 use App\Models\KhoaHocDaHoc;
+use App\Models\Banner;
 
 
 
@@ -1351,4 +1352,14 @@ Route::Post("/TongSoDangKy", function (Request $request) {
         ], 404);
     }
     return new GiangVienApiResource($GiangVien);
+});
+
+
+//show Banner
+Route::get('/showBanner', function () {
+    $banners = Banner::all();
+    if ($banners->isNotEmpty()) {
+        return Showbanner::collection($banners);
+    }
+    return response()->json([], 404);
 });

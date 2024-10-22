@@ -2,7 +2,7 @@
 import React , {useState , useEffect} from "react";
 import Header from "../../component/header/header";
 import Footercomponent from "../../component/footer/footer";
-import { CourseDetails } from '../../../../src/service/course/course.service';
+import { CourseDetails } from '../../../service/course/course.service';
 
 
 

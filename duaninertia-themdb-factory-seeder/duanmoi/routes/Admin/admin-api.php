@@ -7,6 +7,7 @@ use App\Http\Resources\Admin\ShowChiTietKhoaHoc;
 use App\Http\Resources\Admin\EditCodeApi;
 use App\Http\Resources\Admin\KhoaHocDaHocApiResource;
 use App\Http\Resources\ThanhToanApiResource;
+use App\Http\Resources\Admin\Showbanner;
 use Illuminate\Http\Request;
 
 
@@ -31,6 +32,7 @@ use App\Models\TrinhDo;
 use App\Models\TheLoaiCon;
 use App\Models\KhoaHocDaHoc;
 use App\Models\ThanhToan;
+use App\Models\Banner;
 
 
 
@@ -145,7 +147,56 @@ Route::prefix('admin-api')->group(function () {
     });
 
 
+    //chinh sua banner
+    Route::get("/Showbanner", function () {
+        $banner = Banner::all();
+        return response()->json($banner);
+    });
 
+    Route::post("/banner", function (Request $request) {
+        $request->validate([
+            'tieude' => 'required|string|max:255', // Validate as a string
+            'hinh' => 'required|string|max:255',   // Validate image URL as string
+            'mota' => 'required|string|max:255',
+        ]);
+
+        try {
+            $banner = Banner::create([
+                'tieude' => $request->tieude,
+                'hinh' => $request->hinh,
+                'mota' => $request->mota,
+            ]);
+            return response()->json($banner, 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Unable to create banner'], 500);
+        }
+    });
+
+
+    Route::put("/banner", function (Request $request) {
+        $validatedData = $request->validate([
+            'hinh' => 'required|string|max:255',
+            'id' => 'required|integer',
+            'tieude' => 'required|string|max:255',
+            'trangthai' => 'required|integer',
+        ]);
+
+        $banner = Banner::find($validatedData['id']);
+        if ($banner) {
+            $banner->hinh = $validatedData['hinh'];
+            $banner->tieude = $validatedData['tieude'];
+            $banner->trangthai = $validatedData['trangthai'];
+
+            if ($validatedData['trangthai'] != 1) {
+                Banner::where('id', '!=', $validatedData['id'])->update(['trangthai' => 1]);
+            }
+
+            $banner->save();
+            return response()->json(['message' => 'Banner updated successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Banner not found'], 404);
+        }
+    });
 
 
 

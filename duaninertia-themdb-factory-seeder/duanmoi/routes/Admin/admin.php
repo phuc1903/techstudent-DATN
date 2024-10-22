@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\Student;
 use App\Http\Controllers\Admin\Setting;
 use App\Http\Controllers\Admin\EditCodeApi;
+use App\Http\Controllers\Admin\EditBanner;
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [Dashboard::class, 'index']);
@@ -13,6 +14,10 @@ Route::prefix('admin')->group(function () {
     Route::Get('/khoahocdangtienhanh/{id}', [Dashboard::class, 'Details']);
     Route::Get('/khoahodahoanhthanh', [Dashboard::class, 'DaHoc']);
     Route::Get('/khoahocdangkymoi', [Dashboard::class, 'DangKyMoi']);
+    
+    Route::Get('/ThemBanner', [EditBanner::class, 'ThemBanner']);
+    Route::Get('/ShowBanner', [EditBanner::class, 'ShowBanner']);
+
 
     
     Route::get('/thongke', [Setting::class,'index']);
