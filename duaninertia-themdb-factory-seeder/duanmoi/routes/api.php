@@ -27,7 +27,11 @@ use App\Http\Resources\BaiHocApiResource;
 use App\Http\Resources\APIbaihoc;
 use App\Http\Resources\DanhGiaApiResource;
 use App\Http\Resources\khoahocdahocApiResource;
+use App\Http\Resources\NguoiDungApiResource;
 use App\Http\Resources\Admin\Showbanner;
+use App\Http\Resources\LichSuApiResource;
+use App\Http\Resources\DonHangChiTietApiResource;
+use App\Http\Resources\KhoaHocBanDuocGiangVien;
 
 use App\Http\Resources\Lecturer\ThemKhoaHocApiResource;
 use App\Http\Resources\Lecturer\GiangVienApiResourc;
@@ -64,6 +68,10 @@ use App\Models\ThanhToan;
 use App\Models\SoLuongDangKy;
 use App\Models\KhoaHocDaHoc;
 use App\Models\Banner;
+
+
+
+
 
 
 
@@ -1355,11 +1363,92 @@ Route::Post("/TongSoDangKy", function (Request $request) {
 });
 
 
+
+
+
 //show Banner
 Route::get('/showBanner', function () {
     $banners = Banner::all();
     if ($banners->isNotEmpty()) {
         return Showbanner::collection($banners);
     }
+    return response()->json([], 404);
+});
+
+//lay nguoi dung
+Route::post('/laynguoidung', function (Request $request) {
+    $request->validate([
+        'id_nguoidung' => 'required|integer',
+    ]);
+
+    $nguoidung = NguoiDung::find($request->id_nguoidung);
+
+    if ($nguoidung) {
+        return new NguoiDungApiResource($nguoidung);
+    }
+
+    return response()->json([
+        'message' => 'Không tìm thấy người dùng',
+        'status' => 404
+    ], 404);
+});
+//lich su mua hang
+Route::post('/lichsumuahang', function (Request $request) {
+    $request->validate([
+        'id_nguoidung' => 'required|integer',
+    ]);
+
+    $lichsu = donhang::where('id_nguoidung', $request->id_nguoidung)->get();
+
+    if ($lichsu->isNotEmpty()) {
+        return LichSuApiResource::collection($lichsu);
+    }
+
+    return response()->json([], 404);
+});
+Route::post("donhangchitiet", function (Request $request) {
+    $request->validate([
+        'id_donhang' => 'required|integer',
+    ]);
+
+    $donhang = DonHang::find($request->id_donhang);
+
+    if ($donhang) {
+        $donhangchitiet = DonHangChiTiet::where('id_donhang', $request->id_donhang)->get();
+        if ($donhangchitiet->isNotEmpty()) {
+            return DonHangChiTietApiResource::collection($donhangchitiet);
+        }
+    }
+
+    return response()->json([], 404);
+});
+//lay giang vien theo id
+Route::post("giangvienhientai", function (Request $request) {
+    $request->validate([
+        'id_giangvien' => 'required|integer',
+    ]);
+
+    $giangvien = GiangVien::find($request->id_giangvien);
+
+    if ($giangvien) {
+        return new GiangVienApiResource($giangvien);
+    }
+
+    return response()->json([
+        'message' => 'Không tìm thấy giảng viên',
+        'status' => 404
+    ], 404);
+});
+Route::post("khoahocbanduocgiangvien", function (Request $request) {
+    $request->validate([
+        'id_giangvien' => 'required|integer',
+    ]);
+
+    $khoahoc = DoanhThu::where('id_giangvien', $request->id_giangvien)->get();
+
+    if ($khoahoc->isNotEmpty()) {
+        return KhoaHocBanDuocGiangVien::collection($khoahoc);
+    }
+
     return response()->json([], 404);
 });
