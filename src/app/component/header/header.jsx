@@ -20,7 +20,10 @@ import { Categoryheader } from '../category/category.component';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const handleClick = (event) => {
+    event.preventDefault();
+    // Your click handling logic here
+  };
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -70,7 +73,7 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const data = JSON.parse(localStorage.getItem('data'));
+  const data = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('data')) : null;
   return (
     <>
       {/* Mirrored from html.themewant.com/studyhub/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Sep 2024 19:38:48 GMT */}
@@ -291,7 +294,7 @@ export default function Header() {
                             <a href="contact.html">Contact</a>
                           </li>
                           <li className="sub-dropdown">
-                            <a href="javascript:void(0);">Zoom</a>
+                            <a onClick={handleClick}>Zoom</a>
                             <ul className="submenu third-lvl base">
                               <li>
                                 <a
@@ -312,7 +315,7 @@ export default function Header() {
                             </ul>
                           </li>
                           <li className="sub-dropdown">
-                            <a href="javascript:void(0);">Event</a>
+                            <a onClick={handleClick}>Event</a>
                             <ul className="submenu third-lvl base">
                               <li>
                                 <a className="mobile-menu-link" href="event.html">
@@ -335,7 +338,7 @@ export default function Header() {
                             </ul>
                           </li>
                           <li className="sub-dropdown">
-                            <a href="javascript:void(0);">Shop</a>
+                            <a onClick={handleClick}>Shop</a>
                             <ul className="submenu third-lvl base">
                               <li>
                                 <a className="mobile-menu-link" href="shop.html">
@@ -567,7 +570,20 @@ export default function Header() {
                     </ul>
                   </nav>
                 </div>
-                <div className="main-nav-one"></div>
+                {data && data.vaitro === 1 ? (
+                  <Link href="/Lecturer" className="ml-4 hover:text-gray-300">
+                    <div className='m-4'>
+                      <p className='p-2 m-0 font-bold text-center rounded-lg bg-cyan-200'>Giảng viên</p>
+                    </div>
+                  </Link>
+                ) : (
+                  <Link href="/chuyendoi" className="ml-4 hover:text-gray-300">
+                    <div className='m-4'>
+                      <p className='p-2 m-0 font-bold text-center rounded-lg bg-cyan-200'>Đăng ký giảng viên</p>
+                    </div>
+                  </Link>
+                )}
+                
                 <div className="header-right-area-one">
                   <div className="actions-area">
                     <div className="search-btn" id="search" onClick={() => Opensearch()}>
@@ -586,7 +602,7 @@ export default function Header() {
                       </div>
                     </div>
                   </div>
-                  {!localStorage.getItem('data') ? (
+                  {typeof window !== 'undefined' && !localStorage.getItem('data') ? (
                     <div className="buttons-area">
                       <a href={"/page/login"} className="rts-btn btn-border">
                         Log In
@@ -607,12 +623,7 @@ export default function Header() {
                         Đăng xuất
                       </a>
                         <div className='flex items-center'>
-                          <Link href={data && data.vaitro === 1 ? "/Lecturer" : "/chuyendoi"}
-                            className="ml-4 hover:text-gray-300">
-                            <div className='m-4 '>
-                            <p className='p-2 m-0 font-bold text-center rounded-lg f text- bg-cyan-200'>Giảng viên</p>
-                          </div>
-                          </Link>
+                      
                         
                           <div className='relative div-imguser'>
                             <img

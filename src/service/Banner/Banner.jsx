@@ -1,6 +1,6 @@
 export const Bannerdata = async () => {
     const url = 'http://127.0.0.1:8000/api/showbanner';
-
+    
     try {
         console.log(`Fetching data from ${url}`);
         const response = await fetch(url); // Use fetch to call the API

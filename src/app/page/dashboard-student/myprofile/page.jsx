@@ -1,67 +1,59 @@
-import React from "react";
+"use client";
+"use strict";
+import React, { useState, useEffect } from "react";
+import { user } from "../../../../service/User/user";
 
+export default function Myprofilestudent() {
+  const [userData, setUserData] = useState(null);
 
-export default function Myprofilestudent(){
-    return(
-        <div className="col-lg-9  rts-sticky-column-item overflow-y-scroll h-lvh">
-  <div className="right-sidebar-my-profile-dash theiaStickySidebar pt--30">
-    <h5 className="title">My Profile</h5>
-    {/* single My portfolio start*/}
-    <div className="my-single-portfolio-dashed">
-      <div className="name">Registration Date</div>
-      <div className="value">February 25, 2022 6:01 am</div>
-    </div>
-    {/* single My portfolio end*/}
-    {/* single My portfolio start*/}
-    <div className="my-single-portfolio-dashed">
-      <div className="name">First Name:</div>
-      <div className="value">Jon Adam</div>
-    </div>
-    {/* single My portfolio end*/}
-    {/* single My portfolio start*/}
-    <div className="my-single-portfolio-dashed">
-      <div className="name">Last Name:</div>
-      <div className="value">Caster</div>
-    </div>
-    {/* single My portfolio end*/}
-    {/* single My portfolio start*/}
-    <div className="my-single-portfolio-dashed">
-      <div className="name">Username:</div>
-      <div className="value">jonadam</div>
-    </div>
-    {/* single My portfolio end*/}
-    {/* single My portfolio start*/}
-    <div className="my-single-portfolio-dashed">
-      <div className="name">Email:</div>
-      <div className="value">studyhub@ino.com</div>
-    </div>
-    {/* single My portfolio end*/}
-    {/* single My portfolio start*/}
-    <div className="my-single-portfolio-dashed">
-      <div className="name">Phone Number:</div>
-      <div className="value">February 25, 2022 6:01 am</div>
-    </div>
-    {/* single My portfolio end*/}
-    {/* single My portfolio start*/}
-    <div className="my-single-portfolio-dashed">
-      <div className="name">Skill/Occupation</div>
-      <div className="value">Full Stack Developer</div>
-    </div>
-    {/* single My portfolio end*/}
-    {/* single My portfolio start*/}
-    <div className="my-single-portfolio-dashed">
-      <div className="name">Biography</div>
-      <div className="value">
-        I have a degree in Journalism with over 15 years of work experience in
-        the field. Throughout the years, I have worked in several well-known
-        institutions and in published several books on Journalism that are
-        available on Amazon.
+  useEffect(() => {
+    user().then((data) => {
+      setUserData(data.data);
+    });
+  }, []);
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
+  console.log(userData);
+
+  return (
+    <div className="overflow-y-scroll col-lg-9 rts-sticky-column-item h-lvh">
+      <div className="right-sidebar-my-profile-dash theiaStickySidebar pt--30">
+        <h5 className="title">My Profile</h5>
+        <div className="my-single-portfolio-dashed">
+          <div className="name">ID</div>
+          <div className="value">{userData.id}</div>
+        </div>
+        <div className="my-single-portfolio-dashed">
+          <div className="name">Name</div>
+          <div className="value">{userData.ten}</div>
+        </div>
+        <div className="my-single-portfolio-dashed">
+          <div className="name">Email</div>
+          <div className="value">{userData.email}</div>
+        </div>
+        <div className="my-single-portfolio-dashed">
+          <div className="name">Phone Number</div>
+          <div className="value">{userData.dienthoai}</div>
+        </div>
+        <div className="my-single-portfolio-dashed">
+          <div className="name">Profile Picture</div>
+          <div className="value">{userData.hinh}</div>
+        </div>
+        <div className="my-single-portfolio-dashed">
+          <div className="name">Role</div>
+          <div className="value">{userData.vaitro}</div>
+        </div>
+        <div className="my-single-portfolio-dashed">
+          <div className="name">Created At</div>
+          <div className="value">{userData.created_at}</div>
+        </div>
+        <div className="my-single-portfolio-dashed">
+          <div className="name">Updated At</div>
+          <div className="value">{userData.updated_at}</div>
+        </div>
       </div>
     </div>
-    {/* single My portfolio end*/}
-  </div>
-</div>
-
-    )
+  );
 }
-
