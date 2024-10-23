@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -8,8 +8,60 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { BarChart } from '@mui/x-charts';
 import { axisClasses } from '@mui/x-charts/ChartsAxis';
-export default function Homedashboardlecturer(){
-    return(
+import { Dashboard } from "../../../../service/Dashboard-lecture/Dashboard-lecture.jsx";
+import { GiangvienKhoaHoc } from "../../../../service/Dashboard-lecture/Dashboard-lecture.jsx";
+import { GiangvienKhoaHocDaMua } from "../../../../service/Dashboard-lecture/Dashboard-lecture.jsx";
+import { GiangvienDoanhThu } from "../../../../service/Dashboard-lecture/Dashboard-lecture.jsx";
+
+export default function Homedashboardlecturer() {
+  const [data, setData] = useState([]);
+  const [khoahoc, setKhoahoc] = useState([]);
+  const [doanhthu, setDoanhthu] = useState([]);
+  const [khoahocdamua ,setKhoahocdamua] = useState([]);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dashboardRes = await Dashboard();
+        localStorage.setItem('lecturerId', JSON.stringify(dashboardRes.data));
+        setData(dashboardRes.data);
+
+        const khoahocRes = await GiangvienKhoaHoc();
+        setKhoahoc(khoahocRes.data);
+
+        setIsDataLoaded(true);
+        const GiangvienKhoaHocDaMuaRes = await GiangvienKhoaHocDaMua();
+        setKhoahocdamua(GiangvienKhoaHocDaMuaRes.data);
+        const GiangvienDoanhThuRes = await GiangvienDoanhThu();
+        setDoanhthu(GiangvienDoanhThuRes.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (isDataLoaded) {
+      console.log(data.giangvien);
+      console.log("khoahoc", khoahoc);
+      console.log(khoahocdamua);
+      console.log(doanhthu);
+    }
+  }, [isDataLoaded, data, khoahoc, khoahocdamua, doanhthu]);
+  
+  const khoahocdadangky = khoahoc.length;
+  const khoahocdahoanthanh = khoahoc.filter((item) => item.trangthai === "Progress").length;
+  const khoahoctamdung = khoahoc.filter((item) => item.trangthai === "Notyet").length;
+  const khoahocdanghoc = khoahocdamua.length;
+  const tongdoanhthu = doanhthu.tongdoanhthu;
+  const sodukhadung = doanhthu.sodukhadung;
+  
+  
+  return (
+      
        
         <div className="overflow-y-scroll col-lg-9 h-lvh">
         <div className="right-sidebar-dashboard">
@@ -21,7 +73,7 @@ export default function Homedashboardlecturer(){
                   <i className="fa-light fa-book-open-cover" />
                 </div>
                 <h5 className="title">
-                  <span className="counter">30</span>
+                <span className="counter">{khoahocdadangky}</span>
                 </h5>
                 <p>Khóa học đã đăng ký</p>
               </div>
@@ -34,7 +86,7 @@ export default function Homedashboardlecturer(){
                   <i className="fa-regular fa-graduation-cap" />
                 </div>
                 <h5 className="title">
-                  <span className="counter">10</span>
+                <span className="counter">{khoahocdanghoc}</span>
                 </h5>
                 <p>Khóa học đang học</p>
               </div>
@@ -47,7 +99,7 @@ export default function Homedashboardlecturer(){
                   <i className="fa-light fa-trophy" />
                 </div>
                 <h5 className="title">
-                  <span className="counter">36</span>
+                <span className="counter">{khoahocdahoanthanh}</span>
                 </h5>
                 <p>Khóa học đã hoàn thành</p>
               </div>
@@ -60,7 +112,7 @@ export default function Homedashboardlecturer(){
                   <i className="fa-light fa-book" />
                 </div>
                 <h5 className="title">
-                  <span className="counter">28</span>
+                <span className="counter">{khoahocdadangky}</span>
                 </h5>
                 <p>Tổng khóa học của tôi</p>
               </div>
@@ -87,9 +139,9 @@ export default function Homedashboardlecturer(){
                   <i className="fa-sharp fa-solid fa-dollar-sign" />
                 </div>
                 <h5 className="title">
-                  <span className="counter">130</span>
+                <span className="counter">{sodukhadung}</span>
                 </h5>
-                <p>Tổng khóa học bán đc</p>
+                <p>Số dư khả dụng</p>
               </div>
               {/* single dashboard-card end */}
             </div>
@@ -114,7 +166,7 @@ export default function Homedashboardlecturer(){
                   <i className="fa-light fa-book" />
                 </div>
                 <h5 className="title">
-                  <span className="counter">28</span>
+                <span className="counter">{khoahoctamdung}</span>
                 </h5>
                 <p>Tổng khóa học tạm dừng</p>
               </div>
@@ -127,7 +179,7 @@ export default function Homedashboardlecturer(){
                   <i className="fa-sharp fa-solid fa-dollar-sign" />
                 </div>
                 <h5 className="title">
-                  $<span className="counter">2900</span>
+                $<span className="counter">{tongdoanhthu}</span>
                 </h5>
                 <p>Tổng thu nhập</p>
               </div>
@@ -138,130 +190,79 @@ export default function Homedashboardlecturer(){
           </div>
           <div className="row mt--40">
             <div className="col-lg-12">
-              {/* in progress course area */}
+            {/* in progress course area */}
+          
               <div className="in-progress-course-wrapper">
                 <h5 className="title">In Progress Courses</h5>
               </div>
+      
               {/* in progress course area end */}
-              {/* single progress area start */}
-              <div className="single-progress-course">
-                <a href="single-course.html" className="thumbnail">
-                  <img src="assets/images/dashboard/02.jpg" alt="img" />
-                </a>
-                <div className="information-progress-course">
-                  <div className="rating-area">
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <span>(0)</span>
-                  </div>
-                  <a href="single-course.html">
-                    <h5 className="title">
-                      User Experience The Ultimate Guide to Usability and UX
-                    </h5>
+            {/* single progress area start */}
+            {khoahoc.map((item) => {
+           
+
+              const gia = Number(item.gia || 0);
+              const giamgia = Number(item.giamgia || 0);
+              const hinh = Number(item.hinh || 0);
+
+              let nonZeroCount = 3; // Initially assume all three values are non-zero
+              let totalPercentage = 0;
+
+              if (gia === 0) {
+                nonZeroCount -= 1;
+              }
+              if (giamgia === 0) {
+                nonZeroCount -= 1;
+              }
+              if (hinh === 0) {
+                nonZeroCount -= 1;
+              }
+              const total = 100 / 3 * nonZeroCount;
+
+              let widthPercentage = 0;
+              if (nonZeroCount > 0) {
+                widthPercentage = total;
+              }
+
+              return (
+                <div className="single-progress-course" key={item.id}>
+                  <a href="single-course.html" className="thumbnail">
+                    <img src={item.hinh} alt="img" />
                   </a>
-                  <span className="comp">
-                    Completed Lessons: 0 of 1 lesson
-                  </span>
-                  <div className="progress-wrapper-lesson-compleate">
-                    <div className="progress">
-                      <div
-                        className="progress-bar wow fadeInLeft bg--primary"
-                        role="progressbar"
-                        style={{ width: "0%" }}
-                        aria-valuenow={25}
-                        aria-valuemin={0}
-                        aria-valuemax={100}
-                      ></div>
+                  <div className="information-progress-course">
+                    <div className="rating-area">
+                      <i className="fa-light fa-star" />
+                      <i className="fa-light fa-star" />
+                      <i className="fa-light fa-star" />
+                      <i className="fa-light fa-star" />
+                      <i className="fa-light fa-star" />
+                      <span>(0)</span>
                     </div>
-                    <div className="end">
-                      <span>0% Complete</span>
+                    <a href="single-course.html">
+                      <h5 className="title">{item.ten}</h5>
+                    </a>
+                    <span className="comp">Completed Lessons: 0 of 1 lesson</span>
+                    <div className="progress-wrapper-lesson-compleate">
+                      <div className="progress">
+                        <div
+                          className="progress-bar wow fadeInLeft bg--primary"
+                          role="progressbar"
+                          style={{ width: `${widthPercentage}%` }}
+                          aria-valuenow={widthPercentage}
+                          aria-valuemin={0}
+                          aria-valuemax={100}
+                        ></div>
+                      </div>
+                      <div className="end">
+                        <span>{widthPercentage}% Complete</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              );
+            })}
               {/* single progress area end */}
               {/* single progress area start */}
-              <div className="single-progress-course">
-                <a href="single-course.html" className="thumbnail">
-                  <img src="assets/images/dashboard/03.jpg" alt="img" />
-                </a>
-                <div className="information-progress-course">
-                  <div className="rating-area">
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <span>(0)</span>
-                  </div>
-                  <a href="single-course.html">
-                    <h5 className="title">
-                      Front-End Course With Bootstrap 5
-                    </h5>
-                  </a>
-                  <span className="comp">
-                    Completed Lessons: 5 of 7 lesson
-                  </span>
-                  <div className="progress-wrapper-lesson-compleate">
-                    <div className="progress">
-                      <div
-                        className="progress-bar wow fadeInLeft bg--primary"
-                        role="progressbar"
-                        style={{ width: "80%" }}
-                        aria-valuenow={25}
-                        aria-valuemin={0}
-                        aria-valuemax={100}
-                      ></div>
-                    </div>
-                    <div className="end">
-                      <span>80% Complete</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* single progress area end */}
-              {/* single progress area start */}
-              <div className="single-progress-course">
-                <a href="single-course.html" className="thumbnail">
-                  <img src="assets/images/dashboard/04.jpg" alt="img" />
-                </a>
-                <div className="information-progress-course">
-                  <div className="rating-area">
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <span>(0)</span>
-                  </div>
-                  <a href="single-course.html">
-                    <h5 className="title">
-                      PHP Basic to Advance Full Course In English
-                    </h5>
-                  </a>
-                  <span className="comp">
-                    Completed Lessons: 3 of 6 lesson
-                  </span>
-                  <div className="progress-wrapper-lesson-compleate">
-                    <div className="progress">
-                      <div
-                        className="progress-bar wow fadeInLeft bg--primary"
-                        role="progressbar"
-                        style={{ width: "50%" }}
-                        aria-valuenow={25}
-                        aria-valuemin={0}
-                        aria-valuemax={100}
-                      ></div>
-                    </div>
-                    <div className="end">
-                      <span>50% Complete</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
               {/* single progress area end */}
             </div>
           </div>
@@ -277,87 +278,22 @@ export default function Homedashboardlecturer(){
               {/* in progress course area end */}
               {/* my course enroll wrapper */}
               <div className="my-course-enroll-wrapper-board">
-                {/* single course inroll */}
+              {/* single course inroll */}
+              {khoahoc.map((item) => (
                 <div className="single-course-inroll-board head">
                   <div className="name">
                     <p>My Course</p>
                   </div>
                   <div className="enroll">
-                    <p>Enrolled</p>
+                    <p>{item.trangthai}</p>
                   </div>
                   <div className="rating">
                     <p>Rating</p>
                   </div>
                 </div>
-                {/* single course inroll end */}
-                {/* single course inroll */}
-                <div className="single-course-inroll-board">
-                  <div className="name">
-                    <p>New Course</p>
-                  </div>
-                  <div className="enroll">
-                    <p>2</p>
-                  </div>
-                  <div className="rating">
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                  </div>
-                </div>
-                {/* single course inroll end */}
-                {/* single course inroll */}
-                <div className="single-course-inroll-board">
-                  <div className="name">
-                    <p>My Course</p>
-                  </div>
-                  <div className="enroll">
-                    <p>0</p>
-                  </div>
-                  <div className="rating">
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                  </div>
-                </div>
-                {/* single course inroll end */}
-                {/* single course inroll */}
-                <div className="single-course-inroll-board">
-                  <div className="name">
-                    <p>Test New Course</p>
-                  </div>
-                  <div className="enroll">
-                    <p>2</p>
-                  </div>
-                  <div className="rating">
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                  </div>
-                </div>
-                {/* single course inroll end */}
-                {/* single course inroll */}
-                <div className="single-course-inroll-board">
-                  <div className="name">
-                    <p>New Course</p>
-                  </div>
-                  <div className="enroll">
-                    <p>2</p>
-                  </div>
-                  <div className="rating">
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                    <i className="fa-light fa-star" />
-                  </div>
-                </div>
-                {/* single course inroll end */}
+            ))}
+            
+              
               </div>
               {/* my course enroll wrapper end */}
             </div>

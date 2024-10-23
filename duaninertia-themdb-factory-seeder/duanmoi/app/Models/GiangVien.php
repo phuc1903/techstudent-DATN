@@ -9,6 +9,10 @@ class GiangVien extends Model
 {   protected $table = 'giangvien';
     protected $fillable = [
         'id',
+        'ten',
+        'email',
+        'password',
+        'hinh',
         'id_nguoidung'
         
     ];

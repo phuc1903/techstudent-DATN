@@ -1352,13 +1352,16 @@ Route::Post("/TongSoDangKy", function (Request $request) {
     $request->validate([
         'id_giangvien' => 'required|integer',
     ]);
-    $GiangVien = DoanhThu::where("id_giangvien", $request->id_giangvien)->get();
-    if (!$GiangVien) {
+
+    $GiangVien = DoanhThu::with('khoahocs')->where("id_giangvien", $request->id_giangvien)->get();
+
+    if ($GiangVien->isEmpty()) {
         return response()->json([
             'message' => 'Không tìm thấy giảng viên',
             'status' => 404
         ], 404);
     }
+
     return new GiangVienApiResource($GiangVien);
 });
 
@@ -1439,6 +1442,22 @@ Route::post("giangvienhientai", function (Request $request) {
         'status' => 404
     ], 404);
 });
+Route::post("giangvientheongdung", function (Request $request) {
+    $request->validate([
+        'id_nguoidung' => 'required|integer',
+    ]);
+
+    $giangvien = GiangVien::where('id_nguoidung', $request->id_nguoidung)->first();
+
+    if ($giangvien) {
+        return new GiangVienApiResource($giangvien);
+    }
+
+    return response()->json([
+        'message' => 'Không tìm thấy giảng viên',
+        'status' => 404
+    ], 404);
+});
 Route::post("khoahocbanduocgiangvien", function (Request $request) {
     $request->validate([
         'id_giangvien' => 'required|integer',
@@ -1453,4 +1472,39 @@ Route::post("khoahocbanduocgiangvien", function (Request $request) {
     return response()->json([], 404);
 });
 //dang ki giang vien
-// Route::post("")
+Route::post("dangkygiangvien", function (Request $request) {
+    // Check if the request has data
+    if (!$request->has(['ten', 'email', 'id_nguoidung', 'password'])) {
+        return response()->json(['message' => 'Missing required fields'], 400);
+    }
+
+    // Validate the request
+    $validatedData = $request->validate([
+        'ten' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255',
+        'id_nguoidung' => 'required|integer',
+        'password' => 'required|string|min:8',
+        'hinh' => 'nullable|string',
+    ]);
+
+    // Provide default values for nullable fields
+    $validatedData['hinh'] = $validatedData['hinh'] ?? '';
+
+    $giangvien = GiangVien::create([
+        'ten' => $validatedData['ten'],
+        'email' => $validatedData['email'],
+        'id_nguoidung' => $validatedData['id_nguoidung'],
+        'password' => Hash::make($validatedData['password']),
+        'hinh' => $validatedData['hinh'],
+    ]);
+    $Nguoidung = NguoiDung::find($validatedData['id_nguoidung']);
+    if ($Nguoidung) {
+        $Nguoidung->vaitro = 1;
+        $Nguoidung->save();
+    }
+
+    if ($giangvien && $Nguoidung) {
+        return response()->json(['message' => 'Giang vien registered successfully']);
+    }
+    return response()->json(['message' => 'Giang vien registration failed'], 500);
+});

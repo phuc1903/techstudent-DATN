@@ -3,75 +3,90 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-
+import "./cart.css";
 
 import Accordion from '@mui/material/Accordion';
-// import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-// import Button from '@mui/material/Button';
 import { Cart } from './cart/cartheader';
-// import { Button } from '@/components/ui/button';
 import { Categoryheader } from '../category/category.component';
 
 
 export default function Header() {
+  const [data, setData] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const handleClick = (event) => {
-    event.preventDefault();
-    // Your click handling logic here
-  };
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
   const [visible, setVisible] = useState(false);
   const [isopensearch, setIsopensearch] = useState(false);
   const [opencart, setOpencart] = useState(false);
   const [header2, setHeader2] = useState(false);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedData = localStorage.getItem('data');
+      if (storedData) {
+        setData(JSON.parse(storedData));
+      }
+    }
+  }, []);
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    // Your click handling logic here
+  };
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   const handleScroll = () => {
-
-
     const scrollTop = window.scrollY;
-
     if (scrollTop > 70) {
       setVisible(true);
     } else {
       setVisible(false);
     }
   };
+
   const Opensearch = () => {
-    setIsopensearch(true)
-  }
+    setIsopensearch(true);
+  };
+
   const Closesearch = () => {
     setIsopensearch(false);
-  }
+  };
+
   const closeheader2 = () => {
-    setHeader2(false)
-  }
+    setHeader2(false);
+  };
+
   const openheader2 = () => {
     setHeader2(true);
-  }
+  };
+
   const clickopencart = () => {
     setOpencart(true);
-  }
+  };
+
   const clickclosecart = () => {
-    setOpencart(false)
-  }
+    setOpencart(false);
+  };
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
   const test = () => {
-    alert("test")
-  }
+    alert('test');
+  };
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const data = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('data')) : null;
+
+
   return (
     <>
       {/* Mirrored from html.themewant.com/studyhub/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Sep 2024 19:38:48 GMT */}
@@ -546,21 +561,19 @@ export default function Header() {
                         </ul>
                       </li>
                       <li className="has-dropdown">
-                        <a className="nav-link" href="#">
+                        <Link className="nav-link" href="#">
                           Trang tính
-                        </a>
+                        </Link>
                         <ul className="submenu">
-                          <li >
-                            <a className="submenu-link" href={"/page/dashboard-student"}>
+                          <li>
+                            <Link className="submenu-link" href="/page/dashboard-student">
                               trang tính học viên
-                            </a>
-
+                            </Link>
                           </li>
-                          <li >
-                            <a className="submenu-link" href={"/page/lecturer-dashboard"}>
+                          <li>
+                            <Link className="submenu-link" href="/page/lecturer-dashboard">
                               Trang tính giảng viên
-                            </a>
-
+                            </Link>
                           </li>
                         </ul>
                       </li>
@@ -568,20 +581,26 @@ export default function Header() {
                     </ul>
                   </nav>
                 </div>
-                {data && data.vaitro === 1 ? (
-                  <Link href="/Lecturer" className="ml-4 hover:text-gray-300">
-                    <div className='m-4'>
-                      <p className='p-2 m-0 font-bold text-center rounded-lg bg-cyan-200'>Giảng viên</p>
-                    </div>
-                  </Link>
+                {typeof window !== 'undefined' && data ? (
+                  data.vaitro === 1 ? (
+                    <Link href="/page/lecturer-dashboard" className="ml-4 hover:text-gray-300">
+                      <div className='m-4'>
+                        <p className='p-2 m-0 font-bold text-center rounded-lg bg-cyan-200'>Giảng viên</p>
+                      </div>
+                    </Link>
+                  ) : (
+                      <Link href="/page/become-instructor" className="ml-4 hover:text-gray-300">
+                      <div className='m-4'>
+                        <p className='p-2 m-0 font-bold text-center rounded-lg bg-cyan-200'>Đăng ký giảng viên</p>
+                      </div>
+                    </Link>
+                  )
                 ) : (
-                  <Link href="/chuyendoi" className="ml-4 hover:text-gray-300">
-                    <div className='m-4'>
-                      <p className='p-2 m-0 font-bold text-center rounded-lg bg-cyan-200'>Đăng ký giảng viên</p>
-                    </div>
-                  </Link>
+                  <div className='m-4'>
+                    <p className='p-2 m-0 font-bold text-center rounded-lg bg-cyan-200'>Loading...</p>
+                  </div>
                 )}
-                
+
                 <div className="header-right-area-one">
                   <div className="actions-area">
                     <div className="search-btn" id="search" onClick={() => Opensearch()}>
@@ -611,49 +630,49 @@ export default function Header() {
                     </div>
                   ) : (
                     <div className="buttons-area">
-                        <a href={"/page/login"} className="rts-btn btn-border"
-                          onClick={() => {
-                            localStorage.removeItem('lecturerId');
-                            localStorage.removeItem('data');
-                            window.location.reload();
-                          }}
-                        >
+                      <a href={"/page/login"} className="rts-btn btn-border"
+                        onClick={() => {
+                          localStorage.removeItem('lecturerId');
+                          localStorage.removeItem('data');
+                          window.location.reload();
+                        }}
+                      >
                         Đăng xuất
                       </a>
-                        <div className='flex items-center'>
-                      
-                        
-                          <div className='relative div-imguser'>
-                            <img
-                              src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1728130178/01_vqeuoq.jpg"
-                              alt=""
-                              className='rounded-full cursor-pointer h-14 w-14'
-                              onClick={toggleDropdown}
-                            />
-                            {isOpen && (
-                              <div className='absolute right-0 bg-white border shadow-lg header-user'>
-                                <div className='flex items-center justify-center py-6 border-b'>
-                                  <div className='mr-4'>
-                                    <img
-                                      src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1728130178/01_vqeuoq.jpg"
-                                      alt=""
-                                      className='w-16 h-16 rounded-full'
-                                    />
-                                  </div>
-                                  <div>
-                                    <p>Nguyen Van A</p>
-                                  </div>
+                      <div className='flex items-center'>
+
+
+                        <div className='relative div-imguser'>
+                          <img
+                            src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1728130178/01_vqeuoq.jpg"
+                            alt=""
+                            className='rounded-full cursor-pointer h-14 w-14'
+                            onClick={toggleDropdown}
+                          />
+                          {isOpen && (
+                            <div className='absolute right-0 bg-white border shadow-lg header-user'>
+                              <div className='flex items-center justify-center py-6 border-b'>
+                                <div className='mr-4'>
+                                  <img
+                                    src="https://res.cloudinary.com/dnjakwi6l/image/upload/v1728130178/01_vqeuoq.jpg"
+                                    alt=""
+                                    className='w-16 h-16 rounded-full'
+                                  />
                                 </div>
-                                <div className='p-2'>
-                                  <button onClick={test} className='px-4 py-2 text-white bg-blue-500 rounded'>
-                                    Click Meme
-                                  </button>
+                                <div>
+                                  <p>Nguyen Van A</p>
                                 </div>
                               </div>
-                            )}
-                          </div>
+                              <div className='p-2'>
+                                <button onClick={test} className='px-4 py-2 text-white bg-blue-500 rounded'>
+                                  Click Meme
+                                </button>
+                              </div>
+                            </div>
+                          )}
                         </div>
-                        
+                      </div>
+
                     </div>
                   )}
                   <div className="menu-btn" id="menu-btn" onClick={() => openheader2()}>
@@ -674,9 +693,6 @@ export default function Header() {
             </div>
           </div>
         </div>
-
-
-        {/* header two */}
 
         {header2 && (
           <div className='absolute top-0 right-0 flex border header-two h-lvh'>
@@ -832,38 +848,13 @@ export default function Header() {
 
 
 
+
+
       </header>
-      {/* header style end */}
-      {/* banner area start */}
 
 
 
 
-
-
-
-      {/* footer call to action area start */}
-
-      {/* all scripts */}
-      {/* jquery min js */}
-      {/* jquery ui js */}
-      {/* metismenu js */}
-      {/* magnific popup js*/}
-      {/* swiper JS 10.2.0 */}
-      {/* counterup js */}
-      {/* waypoint js */}
-      {/* wow js */}
-      {/* isotop mesonary */}
-      {/* jquery imageloaded */}
-      {/* resize sensor js */}
-      {/* sticky sidebar */}
-      {/* gsap twinmax js */}
-      {/* chroma js */}
-      {/* bootstrap 5.0.2 */}
-      {/* dymanic Contact Form */}
-      {/* calender js */}
-      {/* main Js */}
-      {/* Mirrored from html.themewant.com/studyhub/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 30 Sep 2024 19:39:26 GMT */}
     </>
 
   )
