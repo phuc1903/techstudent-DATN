@@ -1452,3 +1452,5 @@ Route::post("khoahocbanduocgiangvien", function (Request $request) {
 
     return response()->json([], 404);
 });
+//dang ki giang vien
+// Route::post("")

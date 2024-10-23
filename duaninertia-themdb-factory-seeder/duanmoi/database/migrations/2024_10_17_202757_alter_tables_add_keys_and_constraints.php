@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class AlterTablesAddKeysAndConstraints extends Migration
 {
@@ -284,7 +285,7 @@ class AlterTablesAddKeysAndConstraints extends Migration
     }
 
     public function down()
-    {
+    {  
         $this->dropForeignKeysFromVideodahoc();
         $this->dropForeignKeysFromVideo();
         $this->dropForeignKeysFromTrinhdo();
@@ -312,248 +313,538 @@ class AlterTablesAddKeysAndConstraints extends Migration
         $this->dropForeignKeysFromChude();
         $this->dropForeignKeysFromBangcap();
         $this->dropForeignKeysFromBaihoc();
+        $this->dropForeignKeysFromThenganhang();
     }
 
     private function dropForeignKeysFromBaihoc()
     {
         if (Schema::hasTable('baihoc')) {
-            Schema::table('baihoc', function (Blueprint $table) {
-                $table->dropForeign(['id_khoahoc']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'baihoc' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'baihoc_id_khoahoc_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('baihoc', function (Blueprint $table) {
+                    $table->dropForeign(['id_khoahoc']);
+                });
+            }
+        }
+    }
+    private function dropForeignKeysFromThenganhang()
+    {
+        if (Schema::hasTable('thenganhang')) {
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'thenganhang' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'thenganhang_id_nguoidung_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('thenganhang', function (Blueprint $table) {
+                    $table->dropForeign(['id_nguoidung']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromBangcap()
     {
         if (Schema::hasTable('bangcap')) {
-            Schema::table('bangcap', function (Blueprint $table) {
-                $table->dropForeign(['id_giangvien']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'bangcap' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'bangcap_id_giangvien_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('bangcap', function (Blueprint $table) {
+                    $table->dropForeign(['id_giangvien']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromChude()
     {
         if (Schema::hasTable('chude')) {
-            Schema::table('chude', function (Blueprint $table) {
-                $table->dropForeign(['id_theloaicon']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'chude' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'chude_id_theloaicon_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('chude', function (Blueprint $table) {
+                    $table->dropForeign(['id_theloaicon']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromChungchi()
     {
         if (Schema::hasTable('chungchi')) {
-            Schema::table('chungchi', function (Blueprint $table) {
-                $table->dropForeign(['id_khoahoc', 'id_nguoidung']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'chungchi' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'chungchi_id_khoahoc_id_nguoidung_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('chungchi', function (Blueprint $table) {
+                    $table->dropForeign(['id_khoahoc', 'id_nguoidung']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromDanhgia()
     {
         if (Schema::hasTable('danhgia')) {
-            Schema::table('danhgia', function (Blueprint $table) {
-                $table->dropForeign(['id_khoahoc', 'id_nguoidung']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'danhgia' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'danhgia_id_khoahoc_id_nguoidung_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('danhgia', function (Blueprint $table) {
+                    $table->dropForeign(['id_khoahoc', 'id_nguoidung']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromDoanhthu()
     {
         if (Schema::hasTable('doanhthu')) {
-            Schema::table('doanhthu', function (Blueprint $table) {
-                $table->dropForeign(['id_khoahoc', 'id_giangvien']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'doanhthu' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'doanhthu_id_khoahoc_id_giangvien_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('doanhthu', function (Blueprint $table) {
+                    $table->dropForeign(['id_khoahoc', 'id_giangvien']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromDonhang()
     {
         if (Schema::hasTable('donhang')) {
-            Schema::table('donhang', function (Blueprint $table) {
-                $table->dropForeign(['id_nguoidung']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'donhang' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'donhang_id_nguoidung_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('donhang', function (Blueprint $table) {
+                    $table->dropForeign(['id_nguoidung']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromDonhangchitiet()
     {
         if (Schema::hasTable('donhangchitiet')) {
-            Schema::table('donhangchitiet', function (Blueprint $table) {
-                $table->dropForeign(['id_donhang', 'id_khoahoc']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'donhangchitiet' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'donhangchitiet_id_donhang_id_khoahoc_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('donhangchitiet', function (Blueprint $table) {
+                    $table->dropForeign(['id_donhang', 'id_khoahoc']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromGiangvien()
     {
         if (Schema::hasTable('giangvien')) {
-            Schema::table('giangvien', function (Blueprint $table) {
-                $table->dropForeign(['id_nguoidung']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'giangvien' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'giangvien_id_nguoidung_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('giangvien', function (Blueprint $table) {
+                    $table->dropForeign(['id_nguoidung']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromGiohang()
     {
         if (Schema::hasTable('giohang')) {
-            Schema::table('giohang', function (Blueprint $table) {
-                $table->dropForeign(['id_khoahoc', 'id_nguoidung']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'giohang' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'giohang_id_khoahoc_id_nguoidung_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('giohang', function (Blueprint $table) {
+                    $table->dropForeign(['id_khoahoc', 'id_nguoidung']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromKhoahoc()
     {
         if (Schema::hasTable('khoahoc')) {
-            Schema::table('khoahoc', function (Blueprint $table) {
-                $table->dropForeign(['id_chude', 'id_giangvien', 'id_theloaicon', 'id_theloai']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'khoahoc' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'khoahoc_id_chude_id_giangvien_id_theloaicon_id_theloai_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('khoahoc', function (Blueprint $table) {
+                    $table->dropForeign(['id_chude', 'id_giangvien', 'id_theloaicon', 'id_theloai']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromKhoahocdahoc()
     {
         if (Schema::hasTable('khoahocdahoc')) {
-            Schema::table('khoahocdahoc', function (Blueprint $table) {
-                $table->dropForeign(['id_nguoidung', 'id_khoahoc']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'khoahocdahoc' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'khoahocdahoc_id_nguoidung_id_khoahoc_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('khoahocdahoc', function (Blueprint $table) {
+                    $table->dropForeign(['id_nguoidung', 'id_khoahoc']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromMagiamgia()
     {
         if (Schema::hasTable('magiamgia')) {
-            Schema::table('magiamgia', function (Blueprint $table) {
-                $table->dropForeign(['id_giangvien']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'magiamgia' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'magiamgia_id_giangvien_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('magiamgia', function (Blueprint $table) {
+                    $table->dropForeign(['id_giangvien']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromMagiamgiakhoahoc()
     {
         if (Schema::hasTable('magiamgiakhoahoc')) {
-            Schema::table('magiamgiakhoahoc', function (Blueprint $table) {
-                $table->dropForeign(['id_magiamgia', 'id_khoahoc']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'magiamgiakhoahoc' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'magiamgiakhoahoc_id_magiamgia_id_khoahoc_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('magiamgiakhoahoc', function (Blueprint $table) {
+                    $table->dropForeign(['id_magiamgia', 'id_khoahoc']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromMangxahoi()
     {
         if (Schema::hasTable('mangxahoi')) {
-            Schema::table('mangxahoi', function (Blueprint $table) {
-                $table->dropForeign(['id_nguoidung', 'id_giangvien']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'mangxahoi' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'mangxahoi_id_nguoidung_id_giangvien_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('mangxahoi', function (Blueprint $table) {
+                    $table->dropForeign(['id_nguoidung', 'id_giangvien']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromNguoidungmagiamgia()
     {
         if (Schema::hasTable('nguoidungmagiamgia')) {
-            Schema::table('nguoidungmagiamgia', function (Blueprint $table) {
-                $table->dropForeign(['id_magiamgia', 'id_nguoidung']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'nguoidungmagiamgia' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'nguoidungmagiamgia_id_magiamgia_id_nguoidung_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('nguoidungmagiamgia', function (Blueprint $table) {
+                    $table->dropForeign(['id_magiamgia', 'id_nguoidung']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromNhantin()
     {
         if (Schema::hasTable('nhantin')) {
-            Schema::table('nhantin', function (Blueprint $table) {
-                $table->dropForeign(['id_nguoidung', 'id_giangvien']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'nhantin' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'nhantin_id_nguoidung_id_giangvien_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('nhantin', function (Blueprint $table) {
+                    $table->dropForeign(['id_nguoidung', 'id_giangvien']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromRuttien()
     {
         if (Schema::hasTable('ruttien')) {
-            Schema::table('ruttien', function (Blueprint $table) {
-                $table->dropForeign(['id_giangvien', 'id_thenganhang']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'ruttien' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'ruttien_id_giangvien_id_thenganhang_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('ruttien', function (Blueprint $table) {
+                    $table->dropForeign(['id_giangvien', 'id_thenganhang']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromSoluongdangky()
     {
         if (Schema::hasTable('soluongdangky')) {
-            Schema::table('soluongdangky', function (Blueprint $table) {
-                $table->dropForeign(['id_khoahoc', 'id_giangvien']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'soluongdangky' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'soluongdangky_id_khoahoc_id_giangvien_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('soluongdangky', function (Blueprint $table) {
+                    $table->dropForeign(['id_khoahoc', 'id_giangvien']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromThanhtoan()
     {
         if (Schema::hasTable('thanhtoan')) {
-            Schema::table('thanhtoan', function (Blueprint $table) {
-                $table->dropForeign(['id_khoahoc', 'id_nguoidung']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'thanhtoan' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'thanhtoan_id_khoahoc_id_nguoidung_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('thanhtoan', function (Blueprint $table) {
+                    $table->dropForeign(['id_khoahoc', 'id_nguoidung']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromTheloaiTheloaicon()
     {
         if (Schema::hasTable('theloai_theloaicon')) {
-            Schema::table('theloai_theloaicon', function (Blueprint $table) {
-                $table->dropForeign(['id_theloai']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'theloai_theloaicon' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'theloai_theloaicon_id_theloai_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('theloai_theloaicon', function (Blueprint $table) {
+                    $table->dropForeign(['id_theloai']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromThoiluongvideo()
     {
         if (Schema::hasTable('thoiluongvideo')) {
-            Schema::table('thoiluongvideo', function (Blueprint $table) {
-                $table->dropForeign(['id_video']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'thoiluongvideo' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'thoiluongvideo_id_video_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('thoiluongvideo', function (Blueprint $table) {
+                    $table->dropForeign(['id_video']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromTinnhan()
     {
         if (Schema::hasTable('tinnhan')) {
-            Schema::table('tinnhan', function (Blueprint $table) {
-                $table->dropForeign(['id_giangvien', 'id_nguoidung']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'tinnhan' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'tinnhan_id_giangvien_id_nguoidung_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('tinnhan', function (Blueprint $table) {
+                    $table->dropForeign(['id_giangvien', 'id_nguoidung']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromTracnghiem()
     {
         if (Schema::hasTable('tracnghiem')) {
-            Schema::table('tracnghiem', function (Blueprint $table) {
-                $table->dropForeign(['id_baihoc']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'tracnghiem' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'tracnghiem_id_baihoc_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('tracnghiem', function (Blueprint $table) {
+                    $table->dropForeign(['id_baihoc']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromTrinhdo()
     {
         if (Schema::hasTable('trinhdo')) {
-            Schema::table('trinhdo', function (Blueprint $table) {
-                $table->dropForeign(['id_giangvien', 'id_khoahoc']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'trinhdo' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'trinhdo_id_giangvien_id_khoahoc_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('trinhdo', function (Blueprint $table) {
+                    $table->dropForeign(['id_giangvien', 'id_khoahoc']);
+                });
+            }
         }
     }
+
 
     private function dropForeignKeysFromVideodahoc()
     {
         if (Schema::hasTable('videodahoc')) {
-            Schema::table('videodahoc', function (Blueprint $table) {
-                $table->dropForeign(['id_video', 'id_nguoidung']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'videodahoc' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'videodahoc_id_video_id_nguoidung_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('videodahoc', function (Blueprint $table) {
+                    $table->dropForeign(['id_video', 'id_nguoidung']);
+                });
+            }
         }
     }
 
     private function dropForeignKeysFromVideo()
     {
         if (Schema::hasTable('video')) {
-            Schema::table('video', function (Blueprint $table) {
-                $table->dropForeign(['id_baihoc']);
-            });
+            $foreignKeys = DB::select("
+            SELECT CONSTRAINT_NAME 
+            FROM information_schema.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = 'video' 
+            AND TABLE_SCHEMA = DATABASE() 
+            AND CONSTRAINT_NAME = 'video_id_baihoc_foreign'
+        ");
+
+            if (!empty($foreignKeys)) {
+                Schema::table('video', function (Blueprint $table) {
+                    $table->dropForeign(['id_baihoc']);
+                });
+            }
         }
     }
 }

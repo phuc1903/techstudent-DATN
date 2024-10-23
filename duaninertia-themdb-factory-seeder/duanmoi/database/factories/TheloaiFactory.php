@@ -13,6 +13,7 @@ class TheloaiFactory extends Factory
     {
         return [
             'ten' => $this->faker->word,
+            'hinh' => $this->faker->imageUrl(),
         ];
     }
 }

@@ -17,6 +17,7 @@ class TheloaiTheloaiconFactory extends Factory
 
         return [
             'ten' => $this->faker->word,
+            'hinh' => $this->faker->imageUrl(),
             'id_theloai' => $isTheloai ? null : Theloai::factory()->create()->id, // id_theloai is null for Theloai, or the ID of a newly created Theloai record for Theloaicon
         ];
     }

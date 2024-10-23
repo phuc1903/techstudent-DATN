@@ -18,6 +18,7 @@ class GiangVienFactory extends Factory
             'id_nguoidung' => $this->faker->numberBetween(1, 10),
             'tieusu' => $this->faker->sentence,
             'hinh' => $this->faker->imageUrl(640, 480),
+            'password' => $this->faker->password,
             'tongdoanhthu' => $this->faker->randomFloat(2, 1000, 10000000),
             'sodukhadung' => $this->faker->randomFloat(2, 1000, 10000000),
             'updated_at' => now(),

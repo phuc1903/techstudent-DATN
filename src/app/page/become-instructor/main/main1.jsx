@@ -1,118 +1,125 @@
-import React from 'react'
+"use client";
+import React, { useState } from 'react';
+
+const BecomeInstructor = () => {
+    return (
+        <div className="p-6 bg-white rounded-lg shadow-md">
+            <p className="mb-4 text-gray-700">
+                Becoming an instructor involves a series of steps that may vary depending on the type of instruction you're interested in (e.g., academic teaching, corporate training, online courses). Here's a general guide to help you become an instructor:
+            </p>
+            <h6 className="mb-2 text-lg font-semibold">Identify Your Area of Expertise:</h6>
+            <p className="mb-4 text-gray-700">
+                Determine the subject or skill in which you have expertise and are passionate about teaching.
+            </p>
+            <h6 className="mb-2 text-lg font-semibold">Educational Qualifications:</h6>
+            <p className="mb-4 text-gray-700">
+                Obtain the necessary educational qualifications for the level and type of instruction you are aiming for. This may include a bachelor's degree.
+            </p>
+            <div className="mt-6">
+                <img src="assets/images/instructor/15.jpg" alt="instructor" className="w-full rounded-lg shadow-md" />
+            </div>
+        </div>
+    );
+};
+
+const InstructorRules = () => {
+    return (
+        <div className="p-6 bg-white rounded-lg shadow-md">
+            <p className="mb-4 text-gray-700">
+                Becoming an instructor involves a series of steps that may vary depending on the type of instruction you're interested in (e.g., academic teaching, corporate training, online courses). Here's a general guide to help you become an instructor:
+            </p>
+            <h6 className="mb-2 text-lg font-semibold">Identify Your Area of Expertise:</h6>
+            <p className="mb-4 text-gray-700">
+                Determine the subject or skill in which you have expertise and are passionate about teaching.
+            </p>
+            <h6 className="mb-2 text-lg font-semibold">Educational Qualifications:</h6>
+            <p className="mb-4 text-gray-700">
+                Obtain the necessary educational qualifications for the level and type of instruction you are aiming for. This may include a bachelor's degree.
+            </p>
+            <div className="mt-6">
+                <img src="assets/images/instructor/15.jpg" alt="instructor" className="w-full rounded-lg shadow-md" />
+            </div>
+        </div>
+    );
+};
+
+const StartWithCourses = () => {
+    return (
+        <div className="p-6 bg-white rounded-lg shadow-md">
+            <p className="mb-4 text-gray-700">
+                Becoming an instructor involves a series of steps that may vary depending on the type of instruction you're interested in (e.g., academic teaching, corporate training, online courses). Here's a general guide to help you become an instructor:
+            </p>
+            <h6 className="mb-2 text-lg font-semibold">Identify Your Area of Expertise:</h6>
+            <p className="mb-4 text-gray-700">
+                Determine the subject or skill in which you have expertise and are passionate about teaching.
+            </p>
+            <h6 className="mb-2 text-lg font-semibold">Educational Qualifications:</h6>
+            <p className="mb-4 text-gray-700">
+                Obtain the necessary educational qualifications for the level and type of instruction you are aiming for. This may include a bachelor's degree.
+            </p>
+            <div className="mt-6">
+                <img src="assets/images/instructor/15.jpg" alt="instructor" className="w-full rounded-lg shadow-md" />
+            </div>
+        </div>
+    );
+};
 
 export default function Main1() {
-  return (
-      <>
-       
+    const [activeTab, setActiveTab] = useState('home');
+    return (
+        <>
+            {/* becoming instructor area start */}
+            <div className="p-6 bg-gray-100 rounded-lg shadow-md">
+                <div className="mb-12">
+                    <h2 className="mb-4 text-2xl font-bold">How to Become an Instructor</h2>
+                    <p className="text-gray-700">
+                        Becoming an instructor involves a series of steps that may vary depending on the type of instruction you're interested
+                    </p>
+                </div>
+                <div className="mb-12">
+                    <img src="assets/images/instructor/14.jpg" alt="instructor" className="w-full rounded-lg shadow-md" />
+                </div>
+            </div>
+            {/* becoming instructor area end */}
 
-                          {/* becoming instructor area start */}
-                          <div className="becomeinstructor--wrapper">
-                              <div className="title-top-wrapper mb--50">
-                                  <h2 className="title">How to Become an Instructor</h2>
-                                  <p className="disc">
-                                      Becoming an instructor involves a series of steps that may vary depending on the type of instruction you're interested
-                                  </p>
-                              </div>
-                              <div className="large-image-thumb">
-                                  <img src="assets/images/instructor/14.jpg" alt="instructor" />
-                              </div>
-                          </div>
-                          {/* becoming instructor area end */}
-
-                          {/* become a instructor tabs  */}
-                          <div className="becom-instructor-tabs-area-wrapper mt--50">
-                              <ul className="nav nav-tabs" id="myTab" role="tablist">
-                                  <li className="nav-item" role="presentation">
-                                      <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">
-                                          <i className="fa-regular fa-user"></i>
-                                          Become an Instructor</button>
-                                  </li>
-                                  <li className="nav-item" role="presentation">
-                                      <button className="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">
-                                          <i className="fa-light fa-list"></i>
-                                          Instructor Rules</button>
-                                  </li>
-                                  <li className="nav-item" role="presentation">
-                                      <button className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
-                                          <i className="fa-regular fa-box"></i>
-                                          Start with Courses</button>
-                                  </li>
-                              </ul>
-                              <div className="tab-content" id="myTabContent">
-                                  <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                      <div className="becom-instructor-tabs-content">
-                                          <div className="">
-                                              <p className="disc">
-                                                  Becoming an instructor involves a series of steps that may vary depending on the type of instruction you're interested in (e.g., academic teaching, corporate training, online courses). Here's a general guide to help you become an instructor:
-                                              </p>
-                                              <h6 className="title">Identify Your Area of Expertise:</h6>
-                                              <p className="disc">
-                                                  Determine the subject or skill in which you have expertise and are passionate about teaching.
-                                              </p>
-                                              <h6 className="title">Educational Qualifications:</h6>
-                                              <p className="disc">
-                                                  Obtain the necessary educational qualifications for the level and type of instruction you are aiming for. This may include a bachelor's degree.
-                                              </p>
-                                          </div>
-                                          <div className="right-side">
-                                              <div className="thumbnail">
-                                                  <img src="assets/images/instructor/15.jpg" alt="instructor" />
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                      <div className="becom-instructor-tabs-content">
-                                          <div className="">
-                                              <p className="disc">
-                                                  Becoming an instructor involves a series of steps that may vary depending on the type of instruction you're interested in (e.g., academic teaching, corporate training, online courses). Here's a general guide to help you become an instructor:
-                                              </p>
-                                              <h6 className="title">Identify Your Area of Expertise:</h6>
-                                              <p className="disc">
-                                                  Determine the subject or skill in which you have expertise and are passionate about teaching.
-                                              </p>
-                                              <h6 className="title">Educational Qualifications:</h6>
-                                              <p className="disc">
-                                                  Obtain the necessary educational qualifications for the level and type of instruction you are aiming for. This may include a bachelor's degree.
-                                              </p>
-                                          </div>
-                                          <div className="right-side">
-                                              <div className="thumbnail">
-                                                  <img src="assets/images/instructor/15.jpg" alt="instructor" />
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                      <div className="becom-instructor-tabs-content">
-                                          <div className="">
-                                              <p className="disc">
-                                                  Becoming an instructor involves a series of steps that may vary depending on the type of instruction you're interested in (e.g., academic teaching, corporate training, online courses). Here's a general guide to help you become an instructor:
-                                              </p>
-                                              <h6 className="title">Identify Your Area of Expertise:</h6>
-                                              <p className="disc">
-                                                  Determine the subject or skill in which you have expertise and are passionate about teaching.
-                                              </p>
-                                              <h6 className="title">Educational Qualifications:</h6>
-                                              <p className="disc">
-                                                  Obtain the necessary educational qualifications for the level and type of instruction you are aiming for. This may include a bachelor's degree.
-                                              </p>
-                                          </div>
-                                          <div className="right-side">
-                                              <div className="thumbnail">
-                                                  <img src="assets/images/instructor/15.jpg" alt="instructor" />
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          {/* become a instructor tabs end */}
-
-                         
-
-                  
-         
-      </>
-  )
+            {/* become a instructor tabs */}
+            <div className="mt-12">
+                <ul className="flex border-b">
+                    <li className="mr-1">
+                        <button
+                            className={`inline-block px-4 py-2  ${activeTab === 'home' ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-500'}`}
+                            onClick={() => setActiveTab('home')}
+                        >
+                            <i className="mr-2 fa-regular fa-user"></i>
+                            Become an Instructor
+                        </button>
+                    </li>
+                    <li className="mr-1">
+                        <button
+                            className={`inline-block px-4 py-2 ${activeTab === 'profile' ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-500'}`}
+                            onClick={() => setActiveTab('profile')}
+                        >
+                            <i className="mr-2 fa-light fa-list"></i>
+                            Instructor Rules
+                        </button>
+                    </li>
+                    <li className="mr-1">
+                        <button
+                            className={`inline-block px-4 py-2 ${activeTab === 'contact' ? 'text-blue-500 border-b-2 border-blue-500' : 'text-gray-500'}`}
+                            onClick={() => setActiveTab('contact')}
+                        >
+                            <i className="mr-2 fa-regular fa-box"></i>
+                            Start with Courses
+                        </button>
+                    </li>
+                </ul>
+                <div className="mt-6 tab-content">
+                    {activeTab === 'home' && <BecomeInstructor />}
+                    {activeTab === 'profile' && <InstructorRules />}
+                    {activeTab === 'contact' && <StartWithCourses />}
+                </div>
+            </div>
+            {/* become a instructor tabs end */}
+        </>
+    );
 }

@@ -35,6 +35,8 @@ class CreateThenganhangTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('thenganhang');
+        Schema::enableForeignKeyConstraints();
     }
 }

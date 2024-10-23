@@ -15,7 +15,8 @@ class ChudeFactory extends Factory
         return [
             'ten' => $this->faker->sentence(3), // Tên chủ đề giả lập
             'mota' => $this->faker->sentence(10), // Mô tả giả lập
-            'id_theloaicon' => Theloaicon::inRandomOrder()->first()->id, // Lấy id_theloaicon từ model Theloaicon
+            'id_theloaicon' => Theloaicon::whereNotNull('id_theloai')->inRandomOrder()->first()->id,
+            // Lấy id_theloaicon từ model Theloaicon có id_theloai khác null
         ];
     }
 }
