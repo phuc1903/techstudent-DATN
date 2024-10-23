@@ -4,7 +4,9 @@ import Homedashboardstudent from "./home/page"
 
 export default function Dashboardstudent(){
     return (
-       
-        <Homedashboardstudent/>
+     
+            <Homedashboardstudent />
+   
+    
     )
 }

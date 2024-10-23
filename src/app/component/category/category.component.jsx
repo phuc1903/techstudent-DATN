@@ -225,7 +225,7 @@ const NextCategory = () => {
   );
 };
 
-const Category = () => {
+const Category = ({ onCategoryChange }) => {
   const cate = Categorydata();
   const [KhoaHoc, setKhoaHoc] = useState([]);
 
@@ -233,15 +233,15 @@ const Category = () => {
     fetch("http://127.0.0.1:8000/api/allkhoahoc")
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
         setKhoaHoc(data.data);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+
   const uniqueCategories = Array.from(
     new Set(KhoaHoc.map((item) => item.theloai))
   );
-  const category = cate;
+
   return (
     <div className="row">
       <div className="col-lg-12">
@@ -259,11 +259,11 @@ const Category = () => {
             </p>
           </div>
           <div className="flex button-group filters-button-group max-w ">
-            <button className="button is-checked" data-filter="*">
+            <button className="button is-checked" data-filter="*" onClick={() => onCategoryChange('')}>
               Tất cả thể loại
             </button>
             {uniqueCategories.map((theloai, index) => (
-              <button className="button" data-filter=".creative" key={index}>
+              <button className="button" data-filter=".creative" key={index} onClick={() => onCategoryChange(theloai)}>
                 {theloai}
               </button>
             ))}
@@ -332,16 +332,6 @@ const Categoryheader = () => {
 
 export default Categoryheader;
 
-const Subcategory = () => {
-  return (
-    <div className="flex w-auto mt-6 subcategory">
-      <button className="buttonsubcategory">java</button>
-      <button className="isbuttonsubcategory">java</button>
-      <button className="isbuttonsubcategory">java</button>
-      <button className="isbuttonsubcategory">java</button>
-      <button className="isbuttonsubcategory">java</button>
-    </div>
-  );
-};
 
-export { NextCategory, Category, Categoryheader, Subcategory };
+
+export { NextCategory, Category, Categoryheader };

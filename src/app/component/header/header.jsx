@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 
-import './cart.css'
+
 import Accordion from '@mui/material/Accordion';
 // import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -14,8 +14,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Cart } from './cart/cartheader';
 // import { Button } from '@/components/ui/button';
 import { Categoryheader } from '../category/category.component';
-
-
 
 
 export default function Header() {

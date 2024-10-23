@@ -1,108 +1,108 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Subcategory, Category } from "../category/category.component";
+import { Category } from "../category/category.component";
 import Link from "next/link";
 
 // import { Coursesoutstanding,Coursenew } from "@/app/service/course/course.service";
 
 const OutstandingCourse = () => {
   const [KhoaHoc, setKhoaHoc] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/api/allkhoahoc")
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
         setKhoaHoc(data.data);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-  // console.log(KhoaHoc);
-  
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredCourses = selectedCategory
+    ? KhoaHoc.filter((item) => item.theloai === selectedCategory)
+    : KhoaHoc;
 
   return (
     <div>
       <div className="course-area-start rts-section-gap ">
         <div className="container">
-          <Category />
+          <Category onCategoryChange={handleCategoryChange} />
 
           <div className="border-t border-orange-100 ms-portfolio-filter-area main-isotop">
-            <div className="flex justify-center mt-5">
-              <h6>CNTT</h6>
-            </div>
-            <Subcategory />
-
             <div className="portfolio_wrap">
               <div className="filter row g-5 mt--20 portfolio-feed personal">
-                {KhoaHoc.map((item, index) => (
-              
+                {filteredCourses.map((item, index) => (
                   <div
                     className="transition flash grid-item-p element-item creative col-xl-3 col-lg-4 col-md-6 col-sm-6"
-                    data-category="transition">
+                    data-category="transition"
+                    key={index}
+                  >
                     <Link href={`/page/course-detail?id=${item.id}`}>
-                    <div className="rts-single-course">
-                      <a href={"/page/course-detail"} className="thumbnail">
-                        <img src={item.hinh} alt="course" />
-                      </a>
-                      <div
-                        className="save-icon"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal-login">
-                        <i className="fa-sharp fa-light fa-bookmark" />
-                      </div>
-                      <div className="tags-area-wrapper">
-                        <div className="single-tag">
-                          <span>{item.chude}</span>
+                      <div className="rts-single-course">
+                        <a href={"/page/course-detail"} className="thumbnail">
+                          <img src={item.hinh} alt="course" />
+                        </a>
+                        <div
+                          className="save-icon"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal-login">
+                          <i className="fa-sharp fa-light fa-bookmark" />
                         </div>
-                      </div>
-                      <div className="lesson-studente">
-                        <div className="lesson">
-                          <i className="fa-light fa-calendar-lines-pen" />
-                          <span>{item.baihocs} Lessons</span>
-                        </div>
-                        <div className="lesson">
-                          <i className="fa-light fa-user-group" />
-                          <span>{item.dangky} Students</span>
-                        </div>
-                      </div>
-                      <a href={"/page/course-detail"}>
-                        <h5 className="title">{item.ten}</h5>
-                      </a>
-                      <p className="teacher">{item.giangvien}</p>
-                      <div className="rating-and-price">
-                        <div className="rating-area">
-                          <span>4.5</span>
-                          <div className="stars">
-                            <ul>
-                              <li>
-                                <i className="fa-sharp fa-solid fa-star" />
-                              </li>
-                              <li>
-                                <i className="fa-sharp fa-solid fa-star" />
-                              </li>
-                              <li>
-                                <i className="fa-sharp fa-solid fa-star" />
-                              </li>
-                              <li>
-                                <i className="fa-sharp fa-solid fa-star" />
-                              </li>
-                              <li>
-                                <i className="fa-sharp fa-regular fa-star" />
-                              </li>
-                            </ul>
+                        <div className="tags-area-wrapper">
+                          <div className="single-tag">
+                            <span>{item.chude}</span>
                           </div>
                         </div>
-                        <div className="price-area">
-                          <div className="not price">${item.gia}</div>
-                          <div className="price">${item.giamgia}</div>
+                        <div className="lesson-studente">
+                          <div className="lesson">
+                            <i className="fa-light fa-calendar-lines-pen" />
+                            <span>{item.baihocs} Lessons</span>
+                          </div>
+                          <div className="lesson">
+                            <i className="fa-light fa-user-group" />
+                            <span>{item.dangky} Students</span>
+                          </div>
+                        </div>
+                        <a href={"/page/course-detail"}>
+                          <h5 className="title">{item.ten}</h5>
+                        </a>
+                        <p className="teacher">{item.giangvien}</p>
+                        <div className="rating-and-price">
+                          <div className="rating-area">
+                            <span>4.5</span>
+                            <div className="stars">
+                              <ul>
+                                <li>
+                                  <i className="fa-sharp fa-solid fa-star" />
+                                </li>
+                                <li>
+                                  <i className="fa-sharp fa-solid fa-star" />
+                                </li>
+                                <li>
+                                  <i className="fa-sharp fa-solid fa-star" />
+                                </li>
+                                <li>
+                                  <i className="fa-sharp fa-solid fa-star" />
+                                </li>
+                                <li>
+                                  <i className="fa-sharp fa-regular fa-star" />
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          <div className="price-area">
+                            <div className="not price">${item.gia}</div>
+                            <div className="price">${item.giamgia}</div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-        
                     </Link>
-                    </div>
-        
+                  </div>
                 ))}
               </div>
             </div>
@@ -148,7 +148,7 @@ const CourseNew = () => {
             <div className="flex justify-center mt-5">
               <h6>CNTT</h6>
             </div>
-            <Subcategory />
+
 
             <div className="portfolio_wrap">
               <div className="filter row g-5 mt--20 portfolio-feed personal">
@@ -265,7 +265,7 @@ const Courseseal = () => {
             <div className="flex justify-center mt-5">
               <h6>CNTT</h6>
             </div>
-            <Subcategory />
+ 
 
             <div className="portfolio_wrap">
               <div className="filter row g-5 mt--20 portfolio-feed personal">
@@ -381,7 +381,7 @@ const Coursefree = () => {
             <div className="flex justify-center mt-5">
               <h6>CNTT</h6>
             </div>
-            <Subcategory />
+
 
             <div className="portfolio_wrap">
               <div className="filter row g-5 mt--20 portfolio-feed personal">
