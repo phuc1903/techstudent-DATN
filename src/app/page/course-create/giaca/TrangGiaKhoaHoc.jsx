@@ -3,25 +3,32 @@ import React, { useState, useEffect } from 'react';
 function TrangGiaKhoaHoc() {
     const [currency, setCurrency] = useState('usd');
     const [priceTier, setPriceTier] = useState('');
-    const [premiumAppWarning, setPremiumAppWarning] = useState(true);
+    const [premiumAppWarning] = useState(true);
     const [isSaveDisabled, setIsSaveDisabled] = useState(true);
     const [discount, setDiscount] = useState('');
     const [message, setMessage] = useState('');
-    const id_khoahoc = localStorage.getItem('id_khoahoc');
-
+    const [id, setId] = useState(null);
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+          const currentUrl = window.location.href;
+          const url = new URL(currentUrl);
+          const idFromUrl = url.searchParams.get("id");
+          setId(idFromUrl);
+        }
+      }, []);
     useEffect(() => {
         const fetchCoursePrice = async () => {
             try {
-                const response = await fetch('/api/showgiaKhoaHoc', {
+                const response = await fetch('http://127.0.0.1:8000/api/showgiaKhoaHoc', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ id_khoahoc }),
+                    body: JSON.stringify({ id_khoahoc: id }),
                 });
 
                 if (response.ok) {
-                    const data = await response.json();
+                    await response.json();
                     setPriceTier(data.gia);
                     setDiscount(data.giamgia);
                 } else {
@@ -33,7 +40,7 @@ function TrangGiaKhoaHoc() {
         };
 
         fetchCoursePrice();
-    }, [id_khoahoc]);
+    }, [id]);
 
     const currencies = [
         'USD', 'VND'
@@ -142,13 +149,13 @@ function TrangGiaKhoaHoc() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/api/capnhatgiaKhoaHoc', {
+            const response = await fetch('http://127.0.0.1:8000/api/capnhatgiaKhoaHoc', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id_khoahoc: id_khoahoc,
+                    id_khoahoc: id ,
                     gia: priceTier,
                     giamgia: discount,
                 }),
@@ -166,18 +173,18 @@ function TrangGiaKhoaHoc() {
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-            <h2 className="text-2xl font-bold mb-4 text-gray-800">Pricing</h2>
+        <div className="max-w-4xl p-6 mx-auto bg-white rounded-lg shadow-lg">
+            <h2 className="mb-4 text-2xl font-bold text-gray-800">Pricing</h2>
 
             {premiumAppWarning && (
-                <div className="p-4 mb-4 text-yellow-800 bg-yellow-200 border border-yellow-300 rounded-lg flex items-center">
+                <div className="flex items-center p-4 mb-4 text-yellow-800 bg-yellow-200 border border-yellow-300 rounded-lg">
                     <svg className="w-6 h-6 mr-2 text-yellow-800" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M8.257 3.099c.366-.446.997-.446 1.364 0l7.584 9.241c.522.636.068 1.66-.682 1.66H2.092c-.75 0-1.204-1.024-.682-1.66l7.584-9.24zM11 14a1 1 0 11-2 0 1 1 0 012 0zM10 11a1 1 0 10-2 0 1 1 0 002 0z" clipRule="evenodd" />
                     </svg>
                     <div>
                         <h3 className="font-semibold">Please finish your premium application</h3>
                         <p>You'll be able to set your price once your payout method is approved.</p>
-                        <a href="/instructor/user/edit-instructor-info/" className="mt-2 text-indigo-600 font-medium">
+                        <a href="/instructor/user/edit-instructor-info/" className="mt-2 font-medium text-indigo-600">
                             Complete the premium application
                         </a>
                     </div>
@@ -185,16 +192,16 @@ function TrangGiaKhoaHoc() {
             )}
 
             <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-2 text-gray-800">Set a price for your course</h3>
-                <p className="text-gray-600 mb-4">
+                <h3 className="mb-2 text-lg font-semibold text-gray-800">Set a price for your course</h3>
+                <p className="mb-4 text-gray-600">
                     Please select the currency and the price tier for your course. If you’d like to offer your course for free, it must have a total video length of less than 2 hours. Also, courses with practice tests cannot be free.
                 </p>
 
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="currency" className="block text-gray-700 font-medium mb-2">Currency</label>
+                        <label htmlFor="currency" className="block mb-2 font-medium text-gray-700">Currency</label>
                         <select id="currency" value={currency} onChange={handleCurrencyChange}
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-yellow-200 text-gray-900">
+                            className="w-full p-2 text-gray-900 bg-yellow-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
                             {currencies.map((cur) => (
                                 <option key={cur} value={cur.toLowerCase()}>{cur}</option>
                             ))}
@@ -202,9 +209,9 @@ function TrangGiaKhoaHoc() {
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="price-tier" className="block text-gray-700 font-medium mb-2">Price Tier</label>
+                        <label htmlFor="price-tier" className="block mb-2 font-medium text-gray-700">Price Tier</label>
                         <select id="price-tier" value={priceTier} onChange={handlePriceTierChange}
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-yellow-200 text-gray-900">
+                            className="w-full p-2 text-gray-900 bg-yellow-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500">
                             <option value="">Select</option>
                             {priceTiers[currency].map((tier) => (
                                 <option key={tier.value} value={tier.value}>{tier.label} / {tier.vndLabel}</option>
@@ -213,9 +220,9 @@ function TrangGiaKhoaHoc() {
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="discount" className="block text-gray-700 font-medium mb-2">Discount</label>
+                        <label htmlFor="discount" className="block mb-2 font-medium text-gray-700">Discount</label>
                         <select id="discount" value={discount} onChange={handleDiscountChange}
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 bg-yellow-200 text-gray-900" disabled={priceTier === '0'}>
+                            className="w-full p-2 text-gray-900 bg-yellow-200 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" disabled={priceTier === '0'}>
                             <option value="">Select</option>
                             {generateDiscountTiers(priceTier).map((tier) => (
                                 <option key={tier.value} value={tier.value}>{tier.label}</option>

@@ -11,7 +11,7 @@ export default function Layoutdashboardlecturer({children}){
     return (
         <>
         <Header/>
-  <div className="dashboard-banner-area-wrapper mt-32">
+  <div className="mt-32 dashboard-banner-area-wrapper">
     <div className="container">
       <div className="row">
         

@@ -7,29 +7,43 @@ function TrangDich() {
     const [categories, setCategories] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredTopics, setFilteredTopics] = useState([]);
-    const userData = localStorage.getItem('lecturerId');
-    const parsedData = JSON.parse(userData);
-    const khoahocData = localStorage.getItem('id_khoahoc');
-    const khoahocparsedData = JSON.parse(khoahocData);
+    const userData = typeof window !== 'undefined' ? localStorage.getItem('lecturerId') : null;
+    const parsedData = userData ? JSON.parse(userData) : {};
     const cloudName = 'dn7s1su66';
     const uploadPreset = 'my_unsigned_preset';
-
+    const [id, setId] = useState(null);
     const [formData, setFormData] = useState({
         ten: '',
         hinh: '',
-        id_khoahoc: khoahocparsedData,
+        id_khoahoc: '',
         id_chude: '',
         id_theloaicon: '',
         id_theloai: '',
-        trinhdo: '',
+        trinhdo: '',    
         mota: '',
-        id_giangvien: parsedData.giangvien,
+        id_giangvien: parsedData?.giangvien || '',
     });
+    const [imageSelected, setImageSelected] = useState(null);
+    const [imageUrl, setImageUrl] = useState('');
+    const [isImageUploaded, setIsImageUploaded] = useState(false);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const currentUrl = window.location.href;
+            const url = new URL(currentUrl);
+            const idFromUrl = url.searchParams.get("id");
+            setId(idFromUrl);
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                id_khoahoc: idFromUrl
+            }));
+        }
+    }, []);
 
     useEffect(() => {
         const fetchCourseData = async () => {
             try {
-                const response = await axios.post('/api/ShowTrangDichKhoaHoc', { id_khoahoc: khoahocparsedData });
+                const response = await axios.post('http://127.0.0.1:8000/api/ShowTrangDichKhoaHoc', { id_khoahoc: id });
                 const data = response.data;
                 setFormData({
                     ten: data.khoahoc.ten,
@@ -48,15 +62,13 @@ function TrangDich() {
             }
         };
 
-        fetchCourseData();
-    }, []);
-
-    const [imageSelected, setImageSelected] = useState(null);
-    const [imageUrl, setImageUrl] = useState('');
-    const [isImageUploaded, setIsImageUploaded] = useState(false);
+        if (id) {
+            fetchCourseData();
+        }
+    }, [id, parsedData.giangvien]);
 
     useEffect(() => {
-        axios.get('api/theloai')
+        axios.get('http://127.0.0.1:8000/api/theloai')
             .then(response => {
                 setCategories(response.data.data);
                 console.log(response.data.data);
@@ -131,7 +143,6 @@ function TrangDich() {
             .catch(err => console.error(err));
     };
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -149,7 +160,7 @@ function TrangDich() {
         });
 
         // Send data to API
-        axios.post('api/TrangDichKhoaHoc', submitData)
+        axios.post('http://127.0.0.1:8000/api/TrangDichKhoaHoc', submitData)
             .then(response => {
                 console.log(response.data);
                 // Handle success
@@ -160,11 +171,10 @@ function TrangDich() {
             });
     };
 
-
     return (
         <div className="max-w-4xl p-6 mx-auto bg-white rounded-lg shadow-md">
             <h1 className="mb-6 text-2xl font-bold text-red-500">
-                Course Landing Page
+                Course Page
             </h1>
             <p className="mb-6 text-gray-700">
                 Your course landing page is crucial to your success on Udemy. If it's done right, it can also help you gain visibility in search engines like Google.
@@ -216,7 +226,8 @@ function TrangDich() {
                             className="block w-full p-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500"
                             value={category}
                             onChange={handleCategoryChange}
-                        >     <option value="">-- Chọn mục thể loại --</option>
+                        >
+                            <option value="">-- Chọn mục thể loại --</option>
                             {categories
                                 .filter(cat => cat.theloaicons && cat.theloaicons.length > 0)
                                 .map(cat => (
@@ -224,7 +235,6 @@ function TrangDich() {
                                 ))
                             }
                         </select>
-
                     </div>
                 </div>
 

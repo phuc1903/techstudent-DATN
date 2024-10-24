@@ -4,9 +4,12 @@ import "./quanlykhoahoc.css";
 import { GiangvienTaoKhoaHoc } from "../../../../service/Dashboard-lecture/Add-course.jsx";
 import { GiangvienKhoaHoc } from "../../../../service/Dashboard-lecture/Dashboard-lecture.jsx";
 import { ref } from "yup";
-import Link from "next/link";
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-export default function Quanlykhoahoc() {
+
+export default function Quanlykhoahoc( ) {
+ 
   const [formaddkhoahoc, setFormaddkhoahoc] = useState(false);
   const [chude, setChude] = useState([]);
   const [taokhoahoc, setTaokhoahoc] = useState([]);
@@ -234,11 +237,12 @@ export default function Quanlykhoahoc() {
                   widthPercentage = total;
                 }
                 return (
-                  <Link href="/page/lecturer-dashboard/Course-detail/page/">
+                  <Link href={`/page/course-create?id=${item.id}`}>
                   <div className="single-progress-course" key={item.id}>
                     <a href="single-course.html" className="thumbnail">
                       <img src={item.hinh} alt="img" />
                     </a>
+                 
                     <div className="information-progress-course">
                       <a href="single-course.html">
                         <h5 className="title">{item.ten}</h5>
@@ -263,8 +267,10 @@ export default function Quanlykhoahoc() {
                         </div>
                       </div>
                     </div>
+          
                   </div>
                   </Link>
+              
                 );
               })}
           </div>

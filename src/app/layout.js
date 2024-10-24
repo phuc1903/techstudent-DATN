@@ -32,6 +32,7 @@ export default function RootLayout({ children }) {
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
           rel="stylesheet"
         />
+       
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
