@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Chude;
-use App\Models\TheloaiTheloaicon;
+
 
 class ChudeSeeder extends Seeder
 {
@@ -15,16 +15,7 @@ class ChudeSeeder extends Seeder
      */
     public function run()
     {
-        // Ensure there are TheloaiTheloaicon records to reference
-        $theloaiconIds = TheloaiTheloaicon::pluck('id')->toArray();
 
-        // Create Chude records
-        $faker = \Faker\Factory::create();
-
-        Chude::factory()->count(10)->create([
-            'id_theloaicon' => function () use ($theloaiconIds, $faker) {
-                return $faker->randomElement($theloaiconIds);
-            },
-        ]);
+        Chude::factory()->count(10)->create(); // Tạo 10 bản ghi chi tiết đơn hàng giả lập
     }
 }

@@ -2,8 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Khoahoc;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Chude;
+use App\Models\Giangvien;
+use App\Models\Khoahoc;
+use App\Models\Theloai;
 
 class KhoahocFactory extends Factory
 {
@@ -11,6 +14,14 @@ class KhoahocFactory extends Factory
 
     public function definition()
     {
+        $theloaicon = Theloai::whereNotNull('id_theloai')->inRandomOrder()->first();
+        $giangvien = Giangvien::inRandomOrder()->first();
+        $chude = $theloaicon ? Chude::where('id_theloaicon', $theloaicon->id)->inRandomOrder()->first() : null;
+
+        if (!$theloaicon || !$giangvien || !$chude) {
+            throw new \Exception('Required related models not found');
+        }
+
         return [
             'ten' => $this->faker->sentence(3), // Tạo tên khóa học ngẫu nhiên
             'gia' => $this->faker->numberBetween(100000, 1000000), // Giá khóa học ngẫu nhiên
@@ -19,11 +30,11 @@ class KhoahocFactory extends Factory
             'hinh' => $this->faker->imageUrl(640, 480, 'education'), // Hình ảnh ngẫu nhiên
             'dieukien' => $this->faker->sentence(5), // Điều kiện khóa học ngẫu nhiên
             'muctieu' => $this->faker->sentence(5), // Mục tiêu khóa học ngẫu nhiên
-            'trangthai' => $this->faker->randomElement(['active', 'Notyet', 'Progress', 'Decline', 'Pending']), // Trạng thái ngẫu nhiên
-            'id_chude' => $this->faker->numberBetween(1, 10), // Giả sử id_chude từ 1 đến 10
-            'id_theloaicon' => $this->faker->numberBetween(1, 10), // Giả sử id_theloaicon từ 1 đến 10
-            'id_theloai' => $this->faker->numberBetween(1, 10), // Giả sử id_theloai từ 1 đến 10
-            'id_giangvien' => $this->faker->numberBetween(1, 10), // Giả sử id_giangvien từ 1 đến 10
+            'trangthai' => $this->faker->randomElement(['active', 'Notyet', 'Progress', 'Decline', 'Pending']),
+            'id_chude' => $chude->id,
+            'id_theloaicon' => $theloaicon->id,
+            'id_theloai' => $theloaicon->id_theloai, // Use a single ID instead of an array
+            'id_giangvien' => $giangvien->id,
             'created_at' => now(), // Thời gian tạo giả lập
             'updated_at' => now(), // Thời gian cập nhật giả lập
         ];

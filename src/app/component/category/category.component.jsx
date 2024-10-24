@@ -282,7 +282,7 @@ const Categoryheader = () => {
       try {
         const response = await fetch("http://127.0.0.1:8000/api/theloai");
         const data = await response.json();
-        console.log(data.data);
+        // console.log(data.data);
         setDanhMuc(data.data);
       } catch (error) {
         console.error("Error fetching data:", error);

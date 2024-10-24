@@ -15,6 +15,7 @@ class ChuDe extends Model
         'id',
         'ten',
         'hinh',
+        'mota',
         'id_theloaicon',
     ];
 

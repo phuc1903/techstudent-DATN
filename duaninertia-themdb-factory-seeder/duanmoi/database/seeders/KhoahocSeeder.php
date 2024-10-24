@@ -14,16 +14,7 @@ class KhoahocSeeder extends Seeder
      */
     public function run()
     {
-        // Ensure related records exist
-        \App\Models\Chude::factory()->count(5)->create();
-        \App\Models\Giangvien::factory()->count(5)->create();
-
-        // Get all Chude IDs
-        $chudeIds = \App\Models\Chude::pluck('id')->toArray();
-
-        // Tạo 10 bản ghi khóa học giả lập với id_chude hợp lệ
-        Khoahoc::factory()->count(10)->create([
-            'id_chude' => $chudeIds[array_rand($chudeIds)],
-        ]);
+       
+        Khoahoc::factory()->count(10)->create();
     }
 }
