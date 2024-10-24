@@ -20,7 +20,7 @@ class CreateKhoahocTable extends Migration
             $table->integer('gia')->nullable();
             $table->integer('giamgia')->nullable();
             $table->text('mota')->nullable();
-            $table->string('hinh', 255);
+            $table->string('hinh', 255)->nullable();
             $table->string('dieukien', 225)->nullable();
             $table->string('muctieu', 225)->nullable();
             $table->enum('trangthai', ['active', 'Notyet', 'Progress', 'Decline', 'Pending'])->default('Notyet');
@@ -47,10 +47,10 @@ class CreateKhoahocTable extends Migration
 
         // Drop the foreign key constraints if they exist
         $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.TABLE_CONSTRAINTS 
-            WHERE TABLE_SCHEMA = DATABASE() 
-            AND TABLE_NAME = 'khoahoc' 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.TABLE_CONSTRAINTS
+            WHERE TABLE_SCHEMA = DATABASE()
+            AND TABLE_NAME = 'khoahoc'
             AND CONSTRAINT_TYPE = 'FOREIGN KEY'
         ");
 

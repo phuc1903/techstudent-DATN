@@ -29,7 +29,7 @@ class AlterTablesAddKeysAndConstraints extends Migration
         $this->addForeignKeysToRuttien();
         $this->addForeignKeysToSoluongdangky();
         $this->addForeignKeysToThanhtoan();
-     
+
         $this->addForeignKeysToThoiluongvideo();
         $this->addForeignKeysToTinnhan();
         $this->addForeignKeysToTracnghiem();
@@ -129,10 +129,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     private function addForeignKeysToKhoahoc()
     {
         Schema::table('khoahoc', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_chude')->change();
-            $table->unsignedBigInteger('id_giangvien')->change();
-            $table->unsignedBigInteger('id_theloaicon')->change();
-            $table->unsignedBigInteger('id_theloai')->change();
+            $table->unsignedBigInteger('id_chude')->nullable()->change();
+            $table->unsignedBigInteger('id_giangvien')->nullable()->change();
+            $table->unsignedBigInteger('id_theloaicon')->nullable()->change();
+            $table->unsignedBigInteger('id_theloai')->nullable()->change();
             $table->foreign('id_chude')->references('id')->on('chude')->onDelete('cascade');
             $table->foreign('id_giangvien')->references('id')->on('giangvien')->onDelete('cascade');
             $table->foreign('id_theloaicon')->references('id')->on('theloai_theloaicon')->onDelete('cascade');
@@ -228,7 +228,7 @@ class AlterTablesAddKeysAndConstraints extends Migration
         });
     }
 
- 
+
 
     private function addForeignKeysToThoiluongvideo()
     {
@@ -285,7 +285,7 @@ class AlterTablesAddKeysAndConstraints extends Migration
     }
 
     public function down()
-    {  
+    {
         $this->dropForeignKeysFromVideodahoc();
         $this->dropForeignKeysFromVideo();
         $this->dropForeignKeysFromTrinhdo();
@@ -320,10 +320,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('baihoc')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'baihoc' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'baihoc'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'baihoc_id_khoahoc_foreign'
         ");
 
@@ -338,10 +338,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('thenganhang')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'thenganhang' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'thenganhang'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'thenganhang_id_nguoidung_foreign'
         ");
 
@@ -357,10 +357,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('bangcap')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'bangcap' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'bangcap'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'bangcap_id_giangvien_foreign'
         ");
 
@@ -376,10 +376,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('chude')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'chude' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'chude'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'chude_id_theloaicon_foreign'
         ");
 
@@ -395,10 +395,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('chungchi')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'chungchi' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'chungchi'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'chungchi_id_khoahoc_id_nguoidung_foreign'
         ");
 
@@ -414,10 +414,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('danhgia')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'danhgia' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'danhgia'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'danhgia_id_khoahoc_id_nguoidung_foreign'
         ");
 
@@ -433,10 +433,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('doanhthu')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'doanhthu' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'doanhthu'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'doanhthu_id_khoahoc_id_giangvien_foreign'
         ");
 
@@ -452,10 +452,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('donhang')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'donhang' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'donhang'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'donhang_id_nguoidung_foreign'
         ");
 
@@ -471,10 +471,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('donhangchitiet')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'donhangchitiet' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'donhangchitiet'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'donhangchitiet_id_donhang_id_khoahoc_foreign'
         ");
 
@@ -490,10 +490,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('giangvien')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'giangvien' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'giangvien'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'giangvien_id_nguoidung_foreign'
         ");
 
@@ -509,10 +509,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('giohang')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'giohang' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'giohang'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'giohang_id_khoahoc_id_nguoidung_foreign'
         ");
 
@@ -528,10 +528,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('khoahoc')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'khoahoc' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'khoahoc'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'khoahoc_id_chude_id_giangvien_id_theloaicon_id_theloai_foreign'
         ");
 
@@ -547,10 +547,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('khoahocdahoc')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'khoahocdahoc' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'khoahocdahoc'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'khoahocdahoc_id_nguoidung_id_khoahoc_foreign'
         ");
 
@@ -566,10 +566,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('magiamgia')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'magiamgia' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'magiamgia'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'magiamgia_id_giangvien_foreign'
         ");
 
@@ -585,10 +585,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('magiamgiakhoahoc')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'magiamgiakhoahoc' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'magiamgiakhoahoc'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'magiamgiakhoahoc_id_magiamgia_id_khoahoc_foreign'
         ");
 
@@ -604,10 +604,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('mangxahoi')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'mangxahoi' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'mangxahoi'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'mangxahoi_id_nguoidung_id_giangvien_foreign'
         ");
 
@@ -623,10 +623,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('nguoidungmagiamgia')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'nguoidungmagiamgia' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'nguoidungmagiamgia'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'nguoidungmagiamgia_id_magiamgia_id_nguoidung_foreign'
         ");
 
@@ -642,10 +642,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('nhantin')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'nhantin' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'nhantin'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'nhantin_id_nguoidung_id_giangvien_foreign'
         ");
 
@@ -661,10 +661,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('ruttien')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'ruttien' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'ruttien'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'ruttien_id_giangvien_id_thenganhang_foreign'
         ");
 
@@ -680,10 +680,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('soluongdangky')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'soluongdangky' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'soluongdangky'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'soluongdangky_id_khoahoc_id_giangvien_foreign'
         ");
 
@@ -699,10 +699,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('thanhtoan')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'thanhtoan' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'thanhtoan'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'thanhtoan_id_khoahoc_id_nguoidung_foreign'
         ");
 
@@ -718,10 +718,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('theloai_theloaicon')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'theloai_theloaicon' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'theloai_theloaicon'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'theloai_theloaicon_id_theloai_foreign'
         ");
 
@@ -737,10 +737,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('thoiluongvideo')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'thoiluongvideo' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'thoiluongvideo'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'thoiluongvideo_id_video_foreign'
         ");
 
@@ -756,10 +756,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('tinnhan')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'tinnhan' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'tinnhan'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'tinnhan_id_giangvien_id_nguoidung_foreign'
         ");
 
@@ -775,10 +775,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('tracnghiem')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'tracnghiem' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'tracnghiem'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'tracnghiem_id_baihoc_foreign'
         ");
 
@@ -794,10 +794,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('trinhdo')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'trinhdo' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'trinhdo'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'trinhdo_id_giangvien_id_khoahoc_foreign'
         ");
 
@@ -814,10 +814,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('videodahoc')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'videodahoc' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'videodahoc'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'videodahoc_id_video_id_nguoidung_foreign'
         ");
 
@@ -833,10 +833,10 @@ class AlterTablesAddKeysAndConstraints extends Migration
     {
         if (Schema::hasTable('video')) {
             $foreignKeys = DB::select("
-            SELECT CONSTRAINT_NAME 
-            FROM information_schema.KEY_COLUMN_USAGE 
-            WHERE TABLE_NAME = 'video' 
-            AND TABLE_SCHEMA = DATABASE() 
+            SELECT CONSTRAINT_NAME
+            FROM information_schema.KEY_COLUMN_USAGE
+            WHERE TABLE_NAME = 'video'
+            AND TABLE_SCHEMA = DATABASE()
             AND CONSTRAINT_NAME = 'video_id_baihoc_foreign'
         ");
 

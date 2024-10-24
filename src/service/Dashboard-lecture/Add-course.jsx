@@ -9,11 +9,11 @@ export const GiangvienTaoKhoaHoc = async (tieude, chude) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            id_giangvien: parsedLecturer.giangvien ,
+            id_giangvien: parsedLecturer.giangvien,
             ten: tieude,
             id_chude: chude,
         })
-    }); // Gọi API nội bộ
+    });
 
     if (!response.ok) {
         throw new Error('Failed to fetch courses');
