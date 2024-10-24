@@ -4,6 +4,7 @@ import "./quanlykhoahoc.css";
 import { GiangvienTaoKhoaHoc } from "../../../../service/Dashboard-lecture/Add-course.jsx";
 import { GiangvienKhoaHoc } from "../../../../service/Dashboard-lecture/Dashboard-lecture.jsx";
 import { ref } from "yup";
+import Link from "next/link";
 
 export default function Quanlykhoahoc() {
   const [formaddkhoahoc, setFormaddkhoahoc] = useState(false);
@@ -16,6 +17,7 @@ export default function Quanlykhoahoc() {
   const [tieude, setTieude] = useState("");
   const [selectedChude, setSelectedChude] = useState("");
   const [selectedStatus, setSelectedStatus] = useState(""); // New state for selected status
+  const [searchTerm, setSearchTerm] = useState(""); // New state for search term
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,8 +86,9 @@ export default function Quanlykhoahoc() {
   };
 
   const filteredKhoahoc = khoahoc.filter((item) => {
-    if (!selectedStatus) return true;
-    return item.trangthai === selectedStatus;
+    if (selectedStatus && item.trangthai !== selectedStatus) return false;
+    if (searchTerm && !item.ten.toLowerCase().includes(searchTerm.toLowerCase())) return false;
+    return true;
   });
 
   return (
@@ -201,6 +204,8 @@ export default function Quanlykhoahoc() {
                   type="text"
                   placeholder="tìm kiếm khóa học"
                   className="mb-4 border w-96"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)} // Handle search term change
                 />
               </form>
             </div>
@@ -229,6 +234,7 @@ export default function Quanlykhoahoc() {
                   widthPercentage = total;
                 }
                 return (
+                  <Link href="/page/lecturer-dashboard/Course-detail/page/">
                   <div className="single-progress-course" key={item.id}>
                     <a href="single-course.html" className="thumbnail">
                       <img src={item.hinh} alt="img" />
@@ -258,6 +264,7 @@ export default function Quanlykhoahoc() {
                       </div>
                     </div>
                   </div>
+                  </Link>
                 );
               })}
           </div>
